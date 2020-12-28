@@ -2,6 +2,7 @@ package com.ramo.xpandscrum.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -13,7 +14,6 @@ import com.ramo.xpandscrum.adapter.ProjectListAdapter
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.ProjectRepository
 import com.ramo.xpandscrum.model.Project
-import com.ramo.xpandscrum.showToast
 import com.ramo.xpandscrum.viewModel.MainViewModel
 import com.ramo.xpandscrum.viewModel.MainViewModelFactory
 
@@ -52,9 +52,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun onItemClick(project: Project) {
-        mainViewModel.getProject(project.id) {
-
-            it?.let { it1 -> requireContext().showToast(it1.name) }
-        }
+        val bundle = bundleOf("id" to project.id)
+        bundle.putString("name", project.name)
+        findNavController().navigate(R.id.action_mainFragment_to_boardMasterFragment, bundle)
     }
 }
