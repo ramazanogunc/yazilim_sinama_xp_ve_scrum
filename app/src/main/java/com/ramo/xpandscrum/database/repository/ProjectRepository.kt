@@ -1,16 +1,17 @@
-package com.ramo.xpandscrum.repository
+package com.ramo.xpandscrum.database.repository
 
 import com.ramo.xpandscrum.database.dao.ProjectDao
 import com.ramo.xpandscrum.model.Project
-import kotlinx.coroutines.flow.Flow
 
 class ProjectRepository(private val projectDao: ProjectDao) {
 
-    val allProjects: Flow<List<Project>> = projectDao.getAllProjects()
+    val allProjects = projectDao.getAllProjects()
 
     suspend fun insert(project: Project) {
         projectDao.insertProject(project)
     }
+
+    suspend fun get(id: Int) = projectDao.getProject(id)
 
 
 }

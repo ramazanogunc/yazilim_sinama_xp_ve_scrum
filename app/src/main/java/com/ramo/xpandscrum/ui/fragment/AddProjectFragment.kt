@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.ramo.xpandscrum.R
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.model.Project
-import com.ramo.xpandscrum.repository.ProjectRepository
+import com.ramo.xpandscrum.database.repository.ProjectRepository
 import com.ramo.xpandscrum.showToast
 import com.ramo.xpandscrum.viewModel.MainViewModel
 import com.ramo.xpandscrum.viewModel.MainViewModelFactory

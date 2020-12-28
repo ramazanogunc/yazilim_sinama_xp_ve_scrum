@@ -11,11 +11,11 @@ import com.ramo.xpandscrum.R
 import com.ramo.xpandscrum.model.Project
 
 
-class ProjectListAdapter :
+class ProjectListAdapter(private val onClick: (project: Project) -> Unit) :
     ListAdapter<Project, ProjectViewHolder>(ProjectComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
-        return ProjectViewHolder.create(parent)
+        return ProjectViewHolder.create(parent, onClick)
     }
 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
@@ -26,18 +26,20 @@ class ProjectListAdapter :
 
 }
 
-class ProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ProjectViewHolder(itemView: View, private val onClick: (project: Project) -> Unit) :
+    RecyclerView.ViewHolder(itemView) {
     private val projectName: TextView = itemView.findViewById(R.id.projectName)
 
     fun bind(project: Project) {
+        itemView.setOnClickListener { onClick(project) }
         projectName.text = project.name
     }
 
     companion object {
-        fun create(parent: ViewGroup): ProjectViewHolder {
+        fun create(parent: ViewGroup, onClick: (project: Project) -> Unit): ProjectViewHolder {
             val view: View = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_project, parent, false)
-            return ProjectViewHolder(view)
+            return ProjectViewHolder(view, onClick)
         }
     }
 }

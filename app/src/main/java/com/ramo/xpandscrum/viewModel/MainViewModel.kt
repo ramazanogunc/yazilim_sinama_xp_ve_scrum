@@ -1,16 +1,23 @@
 package com.ramo.xpandscrum.viewModel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.ramo.xpandscrum.database.repository.ProjectRepository
 import com.ramo.xpandscrum.model.Project
-import com.ramo.xpandscrum.repository.ProjectRepository
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val projectRepository: ProjectRepository) : ViewModel() {
 
-    val allProjects : LiveData<List<Project>> = projectRepository.allProjects.asLiveData()
+    val allProjects : LiveData<List<Project>> = projectRepository.allProjects
 
     fun insert(project: Project) = viewModelScope.launch {
         projectRepository.insert(project)
+    }
+
+    fun getProject(id:Int, block:(project:Project?)->Unit) = viewModelScope.launch {
+        block(projectRepository.get(id))
     }
 
 
