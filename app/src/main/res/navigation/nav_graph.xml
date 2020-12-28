@@ -11,9 +11,16 @@
         <action
             android:id="@+id/action_mainFragment_to_boardMasterFragment"
             app:destination="@id/boardMasterFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_addProjectFragment"
+            app:destination="@id/addProjectFragment" />
     </fragment>
     <fragment
         android:id="@+id/boardMasterFragment"
         android:name="com.ramo.xpandscrum.ui.fragment.BoardMasterFragment"
         android:label="BoardMasterFragment" />
+    <fragment
+        android:id="@+id/addProjectFragment"
+        android:name="com.ramo.xpandscrum.ui.fragment.AddProjectFragment"
+        android:label="AddProjectFragment" />
 </navigation>

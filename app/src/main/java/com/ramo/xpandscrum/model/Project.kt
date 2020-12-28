@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Project(
-    @ColumnInfo(name = "first_name") val name: String
+    @ColumnInfo(name = "name") val name: String
 ){
-    @PrimaryKey(autoGenerate = true) val id: Int? = null
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
 }
