@@ -2,16 +2,17 @@ package com.ramo.xpandscrum.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(
-    foreignKeys = [
-        ForeignKey(
-            entity = Project::class,
-            parentColumns = ["id"],
-            childColumns = ["projectId"],
-            onDelete = ForeignKey.CASCADE
-        )
+    tableName = "card_table",
+    foreignKeys = [ForeignKey(
+        entity = Project::class,
+        parentColumns = arrayOf("_id"),
+        childColumns = arrayOf("projectId"),
+        onDelete = ForeignKey.CASCADE
+    )
     ]
 )
 data class Card(
@@ -25,5 +26,6 @@ data class Card(
     var boardType: BoardType = BoardType.TODO,
     var projectId: Int = 0
 ) {
+    @PrimaryKey(autoGenerate = true)
     var cardId: Int = 0
 }

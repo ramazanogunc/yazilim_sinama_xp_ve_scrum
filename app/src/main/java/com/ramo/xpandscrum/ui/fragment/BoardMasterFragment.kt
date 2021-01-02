@@ -1,19 +1,28 @@
 package com.ramo.xpandscrum.ui.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.widget.Toolbar
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.tabs.TabLayout
-import com.ramo.xpandscrum.R
 import com.ramo.xpandscrum.adapter.BoardMasterFragmentAdapter
+import com.ramo.xpandscrum.databinding.FragmentMasterBoardBinding
 
-class BoardMasterFragment : Fragment(R.layout.fragment_master_board) {
+class BoardMasterFragment : Fragment() {
 
     private var projectId: Int = 0
     private lateinit var projectName: String
+
+    private var masterBoardBinding: FragmentMasterBoardBinding? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        masterBoardBinding = FragmentMasterBoardBinding.inflate(layoutInflater, container, false)
+        return masterBoardBinding!!.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,23 +31,27 @@ class BoardMasterFragment : Fragment(R.layout.fragment_master_board) {
         projectName = arguments?.getString("name")!!
         initUi()
         initTabLayout()
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        masterBoardBinding = null
     }
 
     private fun initUi() {
-        view?.findViewById<Toolbar>(R.id.toolbar)?.title = projectName
-        view?.findViewById<ExtendedFloatingActionButton>(R.id.fabAddCard)
-            ?.setOnClickListener { onFabClick() }
+        with(masterBoardBinding) {
+            this!!.toolbar.title = projectName
+            fabAddCard.setOnClickListener { onFabClick() }
+        }
     }
 
     private fun initTabLayout() {
         val adapter = BoardMasterFragmentAdapter(childFragmentManager, projectId)
-        val tabLayout = view?.findViewById<TabLayout>(R.id.tabs)
-        val viewPager = view?.findViewById<ViewPager>(R.id.viewPager)
-        viewPager?.adapter = adapter
-        tabLayout?.setupWithViewPager(viewPager)
+        with(masterBoardBinding) {
+            this!!.viewPager.adapter = adapter
+            tabs.setupWithViewPager(viewPager)
+        }
     }
-
 
     private fun onFabClick() {
 
