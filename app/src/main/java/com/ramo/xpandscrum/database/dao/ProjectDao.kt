@@ -9,15 +9,15 @@ import com.ramo.xpandscrum.model.Project
 
 @Dao
 interface ProjectDao {
-    @Query("SELECT * FROM project")
+    @Query("SELECT * FROM project__table")
     fun getAllProjects(): LiveData<List<Project>>
 
-    @Query("SELECT * FROM project WHERE id=:id")
+    @Query("SELECT * FROM project__table WHERE _id=:id")
     suspend fun getProject(id:Int): Project?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertProject(project: Project)
 
-    @Query("DELETE FROM project WHERE id=:id")
+    @Query("DELETE FROM project__table WHERE _id=:id")
     fun deleteProject(id:Int)
 }

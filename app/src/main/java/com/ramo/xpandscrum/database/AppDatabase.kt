@@ -6,16 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.ramo.xpandscrum.database.dao.ProjectDao
+import com.ramo.xpandscrum.model.Card
 import com.ramo.xpandscrum.model.Project
 
 @Database(
     entities = [
-        Project::class
+        Project::class,
+        Card::class
     ],
     version = 1,
     exportSchema = false
 )
-@TypeConverters(BoardTypeConverter::class)
+@TypeConverters(DataTypeConverter::class)
 abstract class AppDatabase : RoomDatabase(){
     abstract val projectDao: ProjectDao
 
