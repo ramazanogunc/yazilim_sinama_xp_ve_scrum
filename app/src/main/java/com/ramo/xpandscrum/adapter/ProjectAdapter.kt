@@ -9,13 +9,17 @@ import com.ramo.xpandscrum.databinding.ItemProjectBinding
 import com.ramo.xpandscrum.model.Project
 
 
-class ProjectListAdapter(private val onClick: (project: Project) -> Unit) :
+class ProjectListAdapter(
+    private val onItemClick: (project: Project) -> Unit,
+    private val onEditClick: (project: Project) -> Unit,
+    private val onDeleteClick: (project: Project) -> Unit
+) :
     ListAdapter<Project, ProjectViewHolder>(ProjectComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
         val itemBinding =
             ItemProjectBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProjectViewHolder(itemBinding, onClick)
+        return ProjectViewHolder(itemBinding, onItemClick, onEditClick, onDeleteClick)
     }
 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
@@ -27,24 +31,21 @@ class ProjectListAdapter(private val onClick: (project: Project) -> Unit) :
 
 class ProjectViewHolder(
     private val itemBinding: ItemProjectBinding,
-    private val onClick: (project: Project) -> Unit
+    private val onItemClick: (project: Project) -> Unit,
+    private val onEditClick: (project: Project) -> Unit,
+    private val onDeleteClick: (project: Project) -> Unit
 ) :
     RecyclerView.ViewHolder(itemBinding.root) {
 
     fun bind(project: Project) {
         with(itemBinding) {
-            itemView.setOnClickListener { onClick(project) }
+            itemView.setOnClickListener { onItemClick(project) }
+            itemBinding.btnEdit.setOnClickListener { onEditClick(project) }
+            itemBinding.btnDelete.setOnClickListener { onDeleteClick(project) }
             projectName.text = project.name
         }
     }
 
-//    companion object {
-//        fun create(parent: ViewGroup, onClick: (project: Project) -> Unit): ProjectViewHolder {
-//            val view: View = LayoutInflater.from(parent.context)
-//                .inflate(R.layout.item_project, parent, false)
-//            return ProjectViewHolder(view, onClick)
-//        }
-//    }
 }
 
 class ProjectComparator : DiffUtil.ItemCallback<Project>() {

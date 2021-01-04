@@ -11,4 +11,5 @@
     <color name="secondaryDarkColor">#bc5100</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
+    <color name="red">#DA0000</color>
 </resources>

@@ -1,10 +1,7 @@
 package com.ramo.xpandscrum.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.ramo.xpandscrum.model.Project
 
 @Dao
@@ -18,6 +15,9 @@ interface ProjectDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertProject(project: Project)
 
+    @Update
+    suspend fun update(project: Project)
+
     @Query("DELETE FROM project__table WHERE _id=:id")
-    fun deleteProject(id:Int)
+    suspend fun deleteProject(id:Int)
 }

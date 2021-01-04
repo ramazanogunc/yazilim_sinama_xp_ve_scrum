@@ -17,4 +17,22 @@
         android:gravity="center"
         android:textStyle="bold"/>
 
+    <ImageButton
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@color/secondaryColor"
+        android:background="@android:color/transparent"
+        android:layout_gravity="start"
+        android:src="@drawable/ic_edit"
+        />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete"
+        android:tint="@color/red"
+        android:background="@android:color/transparent"
+        android:layout_gravity="end"/>
 </androidx.cardview.widget.CardView>

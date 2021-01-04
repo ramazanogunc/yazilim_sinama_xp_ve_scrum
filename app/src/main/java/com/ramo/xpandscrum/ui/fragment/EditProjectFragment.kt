@@ -14,7 +14,7 @@ import com.ramo.xpandscrum.showToast
 import com.ramo.xpandscrum.viewModel.MainViewModel
 import com.ramo.xpandscrum.viewModel.MainViewModelFactory
 
-class AddProjectFragment : Fragment() {
+class EditProjectFragment : Fragment() {
 
     private val projectDao by lazy {
         AppDatabase.getInstance(requireContext()).projectDao
@@ -28,8 +28,8 @@ class AddProjectFragment : Fragment() {
         MainViewModelFactory(projectRepository)
     }
 
-
-    private var addBinding: FragmentAddEditProjectBinding? = null
+    private var projectId: Int = 0
+    private var editBinding: FragmentAddEditProjectBinding? = null
 
 
     override fun onCreateView(
@@ -37,45 +37,53 @@ class AddProjectFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        addBinding = FragmentAddEditProjectBinding.inflate(
+        editBinding = FragmentAddEditProjectBinding.inflate(
             layoutInflater,
             container,
             false
         )
-        return addBinding!!.root
+        return editBinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addBinding?.let { it.btnSave.setOnClickListener { onSaveClick() } }
+        editBinding?.let { it.btnSave.setOnClickListener { onSaveClick() } }
+        projectId = arguments?.getInt("projectId")!!
+        mainViewModel.getProject(projectId) { project ->
+            editBinding?.let { it.projectName.setText(project?.name) }
+        }
+
 
     }
 
     private fun onSaveClick() {
         validateInputAndRun {
             val project = getProjectFromUi()
-            mainViewModel.insert(project)
+            mainViewModel.update(project)
             requireContext().showToast("Kaydedildi")
             requireActivity().onBackPressed()
         }
     }
 
     private fun validateInputAndRun(block: () -> Unit) {
-        addBinding?.let {
+        editBinding?.let {
             if (it.projectName.text.isNullOrEmpty())
                 requireContext().showToast("Proje ismi boş geçemez")
             else if (it.projectName.text?.length!! > 50)
                 requireContext().showToast("Proje 200 karakterden uzun olamaz")
             else
                 block()
+
         }
 
 
     }
 
     private fun getProjectFromUi(): Project {
-        return Project(
-            addBinding!!.projectName.text.toString()
+        val project = Project(
+            editBinding!!.projectName.text.toString()
         )
+        project._id = projectId
+        return project
     }
 }

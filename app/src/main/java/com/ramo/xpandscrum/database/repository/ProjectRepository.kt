@@ -13,5 +13,9 @@ class ProjectRepository(private val projectDao: ProjectDao) {
 
     suspend fun get(id: Int) = projectDao.getProject(id)
 
+    suspend fun update(project: Project) = projectDao.update(project)
+
+    suspend fun delete(id : Int) = projectDao.deleteProject(id)
+
 
 }

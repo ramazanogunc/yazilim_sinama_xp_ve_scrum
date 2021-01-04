@@ -18,7 +18,7 @@ import com.ramo.xpandscrum.model.Project
 import com.ramo.xpandscrum.viewModel.MainViewModel
 import com.ramo.xpandscrum.viewModel.MainViewModelFactory
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : Fragment() {
 
     private val projectDao by lazy {
         AppDatabase.getInstance(requireContext()).projectDao
@@ -46,7 +46,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ProjectListAdapter(::onItemClick)
+        val adapter = ProjectListAdapter(::onItemClick,::onEditClick, ::onDeleteClick)
         with(mainBinding) {
             this!!.fabNewProject.setOnClickListener { onClickAddProject() }
             recyclerViewProjects.adapter = adapter
@@ -71,5 +71,15 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         val bundle = bundleOf("id" to project._id)
         bundle.putString("name", project.name)
         findNavController().navigate(R.id.action_mainFragment_to_boardMasterFragment, bundle)
+    }
+
+    private fun onEditClick(project: Project) {
+        val bundle = bundleOf("projectId" to project._id)
+        bundle.putString("name", project.name)
+        findNavController().navigate(R.id.action_mainFragment_to_editProjectFragment, bundle)
+    }
+
+    private fun onDeleteClick(project: Project) {
+        mainViewModel.delete(project._id)
     }
 }

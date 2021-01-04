@@ -10,15 +10,20 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val projectRepository: ProjectRepository) : ViewModel() {
 
-    val allProjects : LiveData<List<Project>> = projectRepository.allProjects
+    val allProjects: LiveData<List<Project>> = projectRepository.allProjects
 
     fun insert(project: Project) = viewModelScope.launch {
         projectRepository.insert(project)
     }
 
-    fun getProject(id:Int, block:(project:Project?)->Unit) = viewModelScope.launch {
+    fun getProject(id: Int, block: (project: Project?) -> Unit) = viewModelScope.launch {
         block(projectRepository.get(id))
     }
+
+    fun update(project: Project) = viewModelScope.launch { projectRepository.update(project) }
+
+
+    fun delete(projectId: Int) = viewModelScope.launch { projectRepository.delete(projectId) }
 
 
 }

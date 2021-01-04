@@ -11,7 +11,7 @@ import com.ramo.xpandscrum.databinding.FragmentBoardBinding
 import com.ramo.xpandscrum.model.BoardType
 
 class BoardFragment(private val projectId: Int, private val boardType: BoardType) :
-    Fragment(R.layout.fragment_board) {
+    Fragment() {
 
     private var boardBinding: FragmentBoardBinding? = null
 
