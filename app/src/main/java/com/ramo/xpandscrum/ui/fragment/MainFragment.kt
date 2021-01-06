@@ -1,22 +1,25 @@
 package com.ramo.xpandscrum.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ramo.xpandscrum.MainActivity
 import com.ramo.xpandscrum.R
 import com.ramo.xpandscrum.adapter.ProjectListAdapter
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.ProjectRepository
+import com.ramo.xpandscrum.database.repository.UserRepository
 import com.ramo.xpandscrum.databinding.FragmentMainBinding
+import com.ramo.xpandscrum.getFakeUsers
 import com.ramo.xpandscrum.model.Project
+import com.ramo.xpandscrum.showToast
 import com.ramo.xpandscrum.viewModel.MainViewModel
 import com.ramo.xpandscrum.viewModel.MainViewModelFactory
+import com.ramo.xpandscrum.viewModel.UserViewModel
 
 class MainFragment : Fragment() {
 
@@ -46,11 +49,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ProjectListAdapter(::onItemClick,::onEditClick, ::onDeleteClick)
+        val adapter = ProjectListAdapter(::onItemClick, ::onEditClick, ::onDeleteClick)
         with(mainBinding) {
             this!!.fabNewProject.setOnClickListener { onClickAddProject() }
             recyclerViewProjects.adapter = adapter
             recyclerViewProjects.layoutManager = LinearLayoutManager(requireContext())
+            // for toolbar menu
+            (requireActivity() as MainActivity).setSupportActionBar(toolbar)
+            setHasOptionsMenu(true)
         }
 
         mainViewModel.allProjects.observe(viewLifecycleOwner) { projectList ->
@@ -61,6 +67,27 @@ class MainFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         mainBinding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main_toolbar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.fakeUsers -> {
+                val userViewModel =
+                    UserViewModel(UserRepository(AppDatabase.getInstance(requireContext()).userDao))
+                val fakeUsers = getFakeUsers()
+                fakeUsers.forEach{ user->
+                    userViewModel.insert(user)
+                }
+                requireContext().showToast("Fake userlar veritabanına eklendi")
+
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun onClickAddProject() {

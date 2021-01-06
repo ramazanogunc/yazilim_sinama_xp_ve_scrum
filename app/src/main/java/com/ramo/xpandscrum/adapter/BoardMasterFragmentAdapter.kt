@@ -3,7 +3,7 @@ package com.ramo.xpandscrum.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.ramo.xpandscrum.model.BoardType
+import com.ramo.xpandscrum.model.CardType
 import com.ramo.xpandscrum.ui.fragment.BoardFragment
 
 class BoardMasterFragmentAdapter(fm: FragmentManager, private val projectId: Int) :
@@ -23,11 +23,11 @@ class BoardMasterFragmentAdapter(fm: FragmentManager, private val projectId: Int
     }
 
     private fun prepareTabs() {
-        setFragment("TO DO", BoardFragment(projectId, BoardType.TODO))
-        setFragment("IN PROGRESS", BoardFragment(projectId, BoardType.IN_PROGRESS))
-        setFragment("REVISION", BoardFragment(projectId, BoardType.REVISION))
-        setFragment("CHECK", BoardFragment(projectId, BoardType.CHECK))
-        setFragment("DONE", BoardFragment(projectId, BoardType.DONE))
+        setFragment("TO DO", BoardFragment(projectId, CardType.TODO))
+        setFragment("IN PROGRESS", BoardFragment(projectId, CardType.IN_PROGRESS))
+        setFragment("REVISION", BoardFragment(projectId, CardType.REVISION))
+        setFragment("CHECK", BoardFragment(projectId, CardType.CHECK))
+        setFragment("DONE", BoardFragment(projectId, CardType.DONE))
     }
 
     private fun setFragment(string: String, boardFragment: BoardFragment) {

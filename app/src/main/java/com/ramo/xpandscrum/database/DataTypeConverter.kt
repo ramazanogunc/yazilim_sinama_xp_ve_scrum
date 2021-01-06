@@ -3,7 +3,7 @@ package com.ramo.xpandscrum.database
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.ramo.xpandscrum.model.BoardType
+import com.ramo.xpandscrum.model.CardType
 import java.lang.reflect.Type
 import java.util.*
 
@@ -11,17 +11,17 @@ import java.util.*
 object DataTypeConverter {
     @TypeConverter
     @JvmStatic
-    fun stringToBoardType(value: String?): BoardType? {
+    fun stringToCardType(value: String?): CardType? {
         if (value == null) {
             return null
         }
-        val type: Type = object : TypeToken<BoardType?>() {}.type
-        return Gson().fromJson<BoardType>(value, type)
+        val type: Type = object : TypeToken<CardType?>() {}.type
+        return Gson().fromJson<CardType>(value, type)
     }
 
     @TypeConverter
     @JvmStatic
-    fun boardTypeToString(value: BoardType?): String? {
+    fun cardTypeToString(value: CardType?): String? {
         if (value == null) {
             return null
         }
@@ -29,8 +29,10 @@ object DataTypeConverter {
     }
 
     @TypeConverter
+    @JvmStatic
     fun fromTimesStamp(value: Long): Date = Date(value)
 
     @TypeConverter
+    @JvmStatic
     fun fromDateToTimeStamp(value: Date): Long = value.time
 }

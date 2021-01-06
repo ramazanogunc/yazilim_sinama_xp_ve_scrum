@@ -16,15 +16,15 @@ import java.util.*
     ]
 )
 data class Card(
-    var date: Date,
-    var technichPerson: String,
+    var name: String,
     var description: String,
     var note: String,
-    // eklenecekler var
+    var date: Date,
+    var predictedMinute: Int,
+    var projectId: Int,
+    var cardType: CardType = CardType.TODO,
+    var realMinute: Int? = null,
 
-    // relionships
-    var boardType: BoardType = BoardType.TODO,
-    var projectId: Int = 0
 ) {
     @PrimaryKey(autoGenerate = true)
     var cardId: Int = 0

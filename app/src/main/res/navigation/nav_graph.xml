@@ -21,7 +21,11 @@
     <fragment
         android:id="@+id/boardMasterFragment"
         android:name="com.ramo.xpandscrum.ui.fragment.BoardMasterFragment"
-        android:label="BoardMasterFragment" />
+        android:label="BoardMasterFragment" >
+        <action
+            android:id="@+id/action_boardMasterFragment_to_addCardFragment"
+            app:destination="@id/addCardFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addProjectFragment"
         android:name="com.ramo.xpandscrum.ui.fragment.AddProjectFragment"
@@ -30,4 +34,8 @@
         android:id="@+id/editProjectFragment"
         android:name="com.ramo.xpandscrum.ui.fragment.EditProjectFragment"
         android:label="EditProjectFragment" />
+    <fragment
+        android:id="@+id/addCardFragment"
+        android:name="com.ramo.xpandscrum.ui.fragment.AddCardFragment"
+        android:label="AddCardFragment" />
 </navigation>

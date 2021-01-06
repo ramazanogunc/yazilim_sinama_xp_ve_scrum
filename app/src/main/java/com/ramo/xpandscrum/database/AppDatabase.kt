@@ -5,23 +5,31 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.ramo.xpandscrum.database.dao.CardDao
 import com.ramo.xpandscrum.database.dao.ProjectDao
+import com.ramo.xpandscrum.database.dao.UserDao
 import com.ramo.xpandscrum.model.Card
+import com.ramo.xpandscrum.model.CardStatus
 import com.ramo.xpandscrum.model.Project
+import com.ramo.xpandscrum.model.User
 
 @Database(
     entities = [
         Project::class,
-        Card::class
+        Card::class,
+        CardStatus::class,
+        User::class
     ],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(DataTypeConverter::class)
-abstract class AppDatabase : RoomDatabase(){
+abstract class AppDatabase : RoomDatabase() {
     abstract val projectDao: ProjectDao
+    abstract val cardDao: CardDao
+    abstract val userDao: UserDao
 
-    companion object{
+    companion object {
         private const val DATABASE_NAME = "xp_and_scrum_db"
 
         @Volatile

@@ -1,6 +1,6 @@
 package com.ramo.xpandscrum.model
 
-enum class BoardType {
+enum class CardType {
     TODO,
     IN_PROGRESS,
     REVISION,
