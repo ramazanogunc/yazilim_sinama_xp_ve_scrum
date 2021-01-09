@@ -1,6 +1,7 @@
 package com.ramo.xpandscrum.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,7 +13,7 @@ import com.ramo.xpandscrum.model.Card
 class CardListAdapter(
     private val onItemClick: (card: Card) -> Unit,
     private val onEditClick: (card: Card) -> Unit,
-    private val onMoveClick: (card: Card) -> Unit
+    private val onMoveClick: (card: Card, v: View) -> Unit
 ) :
     ListAdapter<Card, CardViewHolder>(CardComparator()) {
 
@@ -33,7 +34,7 @@ class CardViewHolder(
     private val itemBinding: ItemBoardBinding,
     private val onItemClick: (card: Card) -> Unit,
     private val onEditClick: (card: Card) -> Unit,
-    private val onMoveClick: (card: Card) -> Unit
+    private val onMoveClick: (card: Card, v: View) -> Unit
 ) :
     RecyclerView.ViewHolder(itemBinding.root) {
 
@@ -41,7 +42,7 @@ class CardViewHolder(
         with(itemBinding) {
             cardName.text = card.name
             btnEdit.setOnClickListener { onEditClick(card) }
-            btnMove.setOnClickListener { onMoveClick(card) }
+            btnMove.setOnClickListener { onMoveClick(card,it) }
             itemView.setOnClickListener { onItemClick(card) }
         }
     }

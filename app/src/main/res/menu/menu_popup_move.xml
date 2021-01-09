@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/todo"
+        android:title="TODO" />
+
+    <item
+        android:id="@+id/inProgress"
+        android:title="IN PROGRESS" />
+    <item
+        android:id="@+id/revision"
+        android:title="REVISION" />
+    <item
+        android:id="@+id/check"
+        android:title="CHECK" />
+    <item
+        android:id="@+id/done"
+        android:title="DONE" />
+</menu>
