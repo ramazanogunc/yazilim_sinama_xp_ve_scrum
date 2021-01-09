@@ -13,6 +13,9 @@ interface CardDao {
     @Query("SELECT * FROM card_table WHERE cardId=:id")
     suspend fun get(id: Int): Card?
 
+    @Query("SELECT * FROM card_table WHERE cardId=:id")
+    fun getCard(id: Int): LiveData<Card>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(card: Card)
 

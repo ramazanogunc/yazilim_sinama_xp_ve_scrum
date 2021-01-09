@@ -13,13 +13,17 @@ class CardViewModel(private val cardRepository: CardRepository) : ViewModel() {
     fun getAllCardFromByProjectAndCardType(projectId: Int, cardType: CardType) =
         cardRepository.getAllCardFromByProjectAndCardType(projectId, cardType)
 
+    fun getCard(cardId: Int) = cardRepository.getCard(cardId)
+
+    fun get(cardId: Int) = viewModelScope.launch { cardRepository.get(cardId) }
+
     fun insert(card: Card) = viewModelScope.launch { cardRepository.insert(card) }
 
     fun update(card: Card) = viewModelScope.launch { cardRepository.update(card) }
 
     fun delete(cardId: Int) = viewModelScope.launch { cardRepository.delete(cardId) }
 
-    fun validateAndInsert(card: Card, block: (message: String) -> Unit){
+    fun validateAndInsert(card: Card, block: (message: String) -> Unit) {
         // if validate()
         // else
         insert(card)

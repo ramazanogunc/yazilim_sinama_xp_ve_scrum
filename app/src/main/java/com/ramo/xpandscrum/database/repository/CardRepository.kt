@@ -9,6 +9,8 @@ class CardRepository(private val cardDao: CardDao) {
     fun getAllCardFromByProjectAndCardType(cardId: Int, cardType: CardType) =
         cardDao.getAllCardFromByProjectAndCardType(cardId, cardType)
 
+    fun getCard(cardId: Int) = cardDao.getCard(cardId)
+
     suspend fun get(cardId: Int) = cardDao.get(cardId)
 
     suspend fun insert(card: Card) = cardDao.insert(card)

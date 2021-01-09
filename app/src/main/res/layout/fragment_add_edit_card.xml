@@ -65,6 +65,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/border_rounded"
                 android:hint="Tarih"
+                android:enabled="false"
                 android:padding="10dp" />
 
             <Spinner
@@ -75,12 +76,6 @@
                 android:background="@drawable/border_rounded"
                 android:hint="Teknik Personel"
                 android:padding="10dp" />
-
-
-
-
-
-
 
         </LinearLayout>
 

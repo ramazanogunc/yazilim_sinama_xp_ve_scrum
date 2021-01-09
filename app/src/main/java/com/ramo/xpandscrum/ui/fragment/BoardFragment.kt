@@ -13,6 +13,7 @@ import com.ramo.xpandscrum.database.repository.CardRepository
 import com.ramo.xpandscrum.databinding.FragmentBoardBinding
 import com.ramo.xpandscrum.model.Card
 import com.ramo.xpandscrum.model.CardType
+import com.ramo.xpandscrum.showToast
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
 
@@ -52,17 +53,16 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
     }
 
     private fun onMoveClick(card: Card) {
-
+        requireContext().showToast(card.cardId.toString())
     }
 
     private fun onEditClick(card: Card) {
-
+        (parentFragment as BoardMasterFragment).navigateEditFragment(card.cardId)
     }
 
     private fun onItemClick(card: Card) {
 
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

@@ -28,6 +28,7 @@ class EditProjectFragment : Fragment() {
         MainViewModelFactory(projectRepository)
     }
 
+
     private var projectId: Int = 0
     private var editBinding: FragmentAddEditProjectBinding? = null
 
@@ -36,7 +37,7 @@ class EditProjectFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         editBinding = FragmentAddEditProjectBinding.inflate(
             layoutInflater,
             container,
@@ -52,8 +53,6 @@ class EditProjectFragment : Fragment() {
         mainViewModel.getProject(projectId) { project ->
             editBinding?.let { it.projectName.setText(project?.name) }
         }
-
-
     }
 
     private fun onSaveClick() {
@@ -73,9 +72,7 @@ class EditProjectFragment : Fragment() {
                 requireContext().showToast("Proje 200 karakterden uzun olamaz")
             else
                 block()
-
         }
-
 
     }
 

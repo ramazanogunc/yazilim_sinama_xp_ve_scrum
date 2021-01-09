@@ -41,6 +41,14 @@ class BoardMasterFragment : Fragment() {
         masterBoardBinding = null
     }
 
+    fun navigateEditFragment(cardId: Int) {
+        findNavController().navigate(
+            BoardMasterFragmentDirections.actionBoardMasterFragmentToEditCardFragment2(
+                cardId
+            )
+        )
+    }
+
     private fun initUi() {
         with(masterBoardBinding) {
             this!!.toolbar.title = projectName

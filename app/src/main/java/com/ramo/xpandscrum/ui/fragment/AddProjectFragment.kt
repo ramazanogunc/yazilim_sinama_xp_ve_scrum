@@ -36,7 +36,7 @@ class AddProjectFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         addBinding = FragmentAddEditProjectBinding.inflate(
             layoutInflater,
             container,

@@ -11,7 +11,8 @@ import java.util.*
         entity = Project::class,
         parentColumns = arrayOf("_id"),
         childColumns = arrayOf("projectId"),
-        onDelete = ForeignKey.CASCADE
+        onDelete = ForeignKey.CASCADE,
+        onUpdate = ForeignKey.CASCADE
     )
     ]
 )
@@ -24,7 +25,6 @@ data class Card(
     var projectId: Int,
     var cardType: CardType = CardType.TODO,
     var realMinute: Int? = null,
-
 ) {
     @PrimaryKey(autoGenerate = true)
     var cardId: Int = 0
