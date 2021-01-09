@@ -51,6 +51,7 @@ class EditCardFragment : Fragment() {
         binding!!.btnSave.setOnClickListener { onSaveClick() }
         requireContext().showToast(cardId.toString())
         cardViewModel.getCard(cardId).observe(viewLifecycleOwner) {
+            projectId=it.projectId!!
             getSetData(it)
         }
     }
