@@ -2,6 +2,7 @@ package com.ramo.xpandscrum
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.view.View
 import android.widget.Toast
 import com.ramo.xpandscrum.model.User
 import java.text.SimpleDateFormat
@@ -32,4 +33,8 @@ fun Date.getCurrentDate(): String {
 fun dateConvert(): Date {
     val date = SimpleDateFormat("dd/M/yyyy hh:mm").parse(Date().getCurrentDate())
     return date!!
+}
+
+fun View.hide() {
+    this.visibility = View.GONE
 }
