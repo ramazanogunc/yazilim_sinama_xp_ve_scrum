@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramo.xpandscrum.R
 import com.ramo.xpandscrum.adapter.CardListAdapter
@@ -23,10 +23,11 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
 
     private var boardBinding: FragmentBoardBinding? = null
 
-    private val cardViewModel: CardViewModel by viewModels {
-        CardViewModelFactory(
-            CardRepository(AppDatabase.getInstance(requireContext()).cardDao)
-        )
+    private val cardViewModel: CardViewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            CardViewModelFactory(CardRepository(AppDatabase.getInstance(requireContext()).cardDao))
+        ).get(CardViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -63,7 +64,7 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
             CardType.CHECK -> R.id.check
             CardType.DONE -> R.id.done
         }
-        activeBoardMenuId?.let{ popup.menu.findItem(it).isEnabled = false }
+        activeBoardMenuId?.let { popup.menu.findItem(it).isEnabled = false }
 
 
         popup.setOnMenuItemClickListener { menuItem ->
