@@ -16,16 +16,10 @@ import com.ramo.xpandscrum.viewModel.MainViewModelFactory
 
 class EditProjectFragment : Fragment() {
 
-    private val projectDao by lazy {
-        AppDatabase.getInstance(requireContext()).projectDao
-    }
-
-    private val projectRepository by lazy {
-        ProjectRepository(projectDao)
-    }
-
     private val mainViewModel: MainViewModel by viewModels {
-        MainViewModelFactory(projectRepository)
+        MainViewModelFactory(
+            ProjectRepository(AppDatabase.getInstance(requireContext()).projectDao)
+        )
     }
 
 

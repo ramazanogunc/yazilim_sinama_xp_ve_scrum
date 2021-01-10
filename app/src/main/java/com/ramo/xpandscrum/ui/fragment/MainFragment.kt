@@ -23,16 +23,10 @@ import com.ramo.xpandscrum.viewModel.UserViewModel
 
 class MainFragment : Fragment() {
 
-    private val projectDao by lazy {
-        AppDatabase.getInstance(requireContext()).projectDao
-    }
-
-    private val projectRepository by lazy {
-        ProjectRepository(projectDao)
-    }
-
     private val mainViewModel: MainViewModel by viewModels {
-        MainViewModelFactory(projectRepository)
+        MainViewModelFactory(
+            ProjectRepository(AppDatabase.getInstance(requireContext()).projectDao)
+        )
     }
 
     private var mainBinding: FragmentMainBinding? = null
@@ -79,7 +73,7 @@ class MainFragment : Fragment() {
                 val userViewModel =
                     UserViewModel(UserRepository(AppDatabase.getInstance(requireContext()).userDao))
                 val fakeUsers = getFakeUsers()
-                fakeUsers.forEach{ user->
+                fakeUsers.forEach { user ->
                     userViewModel.insert(user)
                 }
                 requireContext().showToast("Fake userlar veritabanına eklendi")
