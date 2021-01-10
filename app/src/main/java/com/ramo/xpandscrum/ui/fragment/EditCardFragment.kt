@@ -18,15 +18,14 @@ import com.ramo.xpandscrum.predictDateFromDescription
 import com.ramo.xpandscrum.showToast
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
-import java.text.SimpleDateFormat
 import java.util.*
 
 class EditCardFragment : Fragment() {
 
     private var cardId: Int = 0
-    private var projectId: Int = 0
     private var binding: FragmentAddEditCardBinding? = null
     private val number by navArgs<EditCardFragmentArgs>()
+    private var card : Card?= null
 
     private val cardViewModel: CardViewModel by viewModels {
         CardViewModelFactory(
@@ -51,15 +50,9 @@ class EditCardFragment : Fragment() {
         binding!!.btnSave.setOnClickListener { onSaveClick() }
         requireContext().showToast(cardId.toString())
         cardViewModel.getCard(cardId).observe(viewLifecycleOwner) {
-            projectId=it.projectId!!
+            card = it
             getSetData(it)
         }
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    private fun getCurrentDate(): String {
-        val date = SimpleDateFormat("dd/M/yyyy hh:mm")
-        return date.format(Date())
     }
 
     private fun onSaveClick() {
@@ -79,17 +72,13 @@ class EditCardFragment : Fragment() {
     }
 
     private fun getDatFromUi(): Card {
-        val card = Card(
-            binding!!.name.text.toString(),
-            binding!!.description.text.toString(),
-            binding!!.note.text.toString(),
-            dateConvert(),
-            predictDateFromDescription(binding!!.description.text.toString()),
-            projectId
-        )
-        card.cardId = cardId
-        card.projectId = projectId
-        return card
+        return card!!.apply {
+            name = binding!!.name.text.toString()
+            description = binding!!.description.text.toString()
+            note = binding!!.note.text.toString()
+            date = dateConvert()
+            predictedMinute = predictDateFromDescription(binding!!.description.text.toString())
+        }
     }
 
 }
