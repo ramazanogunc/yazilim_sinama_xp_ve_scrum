@@ -48,5 +48,20 @@
             android:name="cardId"
             android:defaultValue="0"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_editCardFragment_to_cardStatusFragment"
+            app:destination="@id/cardStatusFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/cardStatusFragment"
+        android:name="com.ramo.xpandscrum.ui.fragment.CardStatusFragment"
+        android:label="CardStatusFragment" >
+        <action
+            android:id="@+id/action_cardStatusFragment_to_addEditCardStatusFragment"
+            app:destination="@id/addEditCardStatusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditCardStatusFragment"
+        android:name="com.ramo.xpandscrum.ui.fragment.AddEditCardStatusFragment"
+        android:label="AddEditCardStatusFragment" />
 </navigation>

@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.ramo.xpandscrum.database.dao.CardDao
+import com.ramo.xpandscrum.database.dao.CardStatusDao
 import com.ramo.xpandscrum.database.dao.ProjectDao
 import com.ramo.xpandscrum.database.dao.UserDao
 import com.ramo.xpandscrum.model.Card
@@ -28,6 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val projectDao: ProjectDao
     abstract val cardDao: CardDao
     abstract val userDao: UserDao
+    abstract val cardStatusDao: CardStatusDao
 
     companion object {
         private const val DATABASE_NAME = "xp_and_scrum_db"

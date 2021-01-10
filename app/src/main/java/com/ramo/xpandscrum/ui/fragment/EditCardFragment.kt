@@ -5,17 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.ramo.xpandscrum.*
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.CardRepository
 import com.ramo.xpandscrum.databinding.FragmentAddEditCardBinding
-import com.ramo.xpandscrum.dateConvert
-import com.ramo.xpandscrum.getCurrentDate
 import com.ramo.xpandscrum.model.Card
-import com.ramo.xpandscrum.predictDateFromDescription
-import com.ramo.xpandscrum.showToast
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
 import java.util.*
@@ -49,11 +48,16 @@ class EditCardFragment : Fragment() {
 
         cardId = number.cardId
         binding!!.btnSave.setOnClickListener { onSaveClick() }
-        requireContext().showToast(cardId.toString())
+        binding!!.btnJobTrace.setOnClickListener { onJobTraceClick() }
         cardViewModel.getCard(cardId).observe(viewLifecycleOwner) {
             card = it
             getSetData(it)
         }
+    }
+
+    private fun onJobTraceClick() {
+        val bundle = bundleOf("cardId" to cardId)
+        findNavController().navigate(R.id.action_editCardFragment_to_cardStatusFragment, bundle)
     }
 
     private fun onSaveClick() {
