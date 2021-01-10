@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.CardRepository
@@ -25,12 +25,13 @@ class EditCardFragment : Fragment() {
     private var cardId: Int = 0
     private var binding: FragmentAddEditCardBinding? = null
     private val number by navArgs<EditCardFragmentArgs>()
-    private var card : Card?= null
+    private var card: Card? = null
 
-    private val cardViewModel: CardViewModel by viewModels {
-        CardViewModelFactory(
-            CardRepository(AppDatabase.getInstance(requireContext()).cardDao)
-        )
+    private val cardViewModel: CardViewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            CardViewModelFactory(CardRepository(AppDatabase.getInstance(requireContext()).cardDao))
+        ).get(CardViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -68,6 +69,7 @@ class EditCardFragment : Fragment() {
             this.description.setText(card.description)
             this.note.setText(card.note)
             this.date.setText(Date().getCurrentDate())
+            this.predictDate.setText(card.predictedMinute.toString() + " Tahmini Süre(dakika)")
         }
     }
 

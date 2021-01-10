@@ -5,23 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.ramo.xpandscrum.database.AppDatabase
-import com.ramo.xpandscrum.database.repository.ProjectRepository
+import com.ramo.xpandscrum.database.repository.CardRepository
 import com.ramo.xpandscrum.databinding.FragmentAddEditProjectBinding
 import com.ramo.xpandscrum.model.Project
 import com.ramo.xpandscrum.showToast
+import com.ramo.xpandscrum.viewModel.CardViewModelFactory
 import com.ramo.xpandscrum.viewModel.MainViewModel
-import com.ramo.xpandscrum.viewModel.MainViewModelFactory
 
 class EditProjectFragment : Fragment() {
 
-    private val mainViewModel: MainViewModel by viewModels {
-        MainViewModelFactory(
-            ProjectRepository(AppDatabase.getInstance(requireContext()).projectDao)
-        )
+    private val mainViewModel: MainViewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            CardViewModelFactory(CardRepository(AppDatabase.getInstance(requireContext()).cardDao))
+        ).get(MainViewModel::class.java)
     }
-
 
     private var projectId: Int = 0
     private var editBinding: FragmentAddEditProjectBinding? = null
