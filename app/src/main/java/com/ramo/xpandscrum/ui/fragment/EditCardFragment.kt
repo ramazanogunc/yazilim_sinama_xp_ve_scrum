@@ -58,6 +58,7 @@ class EditCardFragment : Fragment() {
     private fun onJobTraceClick() {
         val bundle = bundleOf("cardId" to cardId)
         findNavController().navigate(R.id.action_editCardFragment_to_cardStatusFragment, bundle)
+
     }
 
     private fun onSaveClick() {

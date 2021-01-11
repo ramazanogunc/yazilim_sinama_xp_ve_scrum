@@ -22,7 +22,6 @@
         android:layout_below="@id/toolbar"
         android:scrollbars="vertical" />
 
-
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fabNewCardStatus"
         android:layout_width="wrap_content"

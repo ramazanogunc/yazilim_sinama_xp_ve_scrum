@@ -5,15 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ramo.xpandscrum.*
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.CardRepository
+import com.ramo.xpandscrum.database.repository.UserRepository
 import com.ramo.xpandscrum.databinding.FragmentAddEditCardBinding
 import com.ramo.xpandscrum.model.Card
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
+import com.ramo.xpandscrum.viewModel.UserViewModel
+import com.ramo.xpandscrum.viewModel.UserViewModelFactory
 import java.util.*
 
 class AddCardFragment : Fragment() {
@@ -26,6 +30,13 @@ class AddCardFragment : Fragment() {
             requireActivity(),
             CardViewModelFactory(CardRepository(AppDatabase.getInstance(requireContext()).cardDao))
         ).get(CardViewModel::class.java)
+    }
+
+    private val userViewModel: UserViewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            UserViewModelFactory(UserRepository(AppDatabase.getInstance(requireContext()).userDao))
+        ).get(UserViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -44,14 +55,27 @@ class AddCardFragment : Fragment() {
         binding!!.btnSave.setOnClickListener { onSaveClick() }
         binding!!.date.setText(Date().getCurrentDate())
         binding!!.predictDate.hide()
+        binding!!.btnJobTrace.hide()
+        setSpinner()
+    }
+
+    private fun setSpinner() {
+        val names = mutableListOf<String>()
+        userViewModel.allUsers.observe(viewLifecycleOwner, {
+            for (i in it)
+                names.add(i.name)
+            val spinnerAdapter =
+                ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, names)
+            binding!!.technicalPerson.adapter = spinnerAdapter
+        })
     }
 
     private fun onSaveClick() {
         val card = getDataFromUi()
         requireActivity().showToast(card.toString())
-        cardViewModel.validateAndInsert(card){ error->
+        requireActivity().onBackPressed()
+        cardViewModel.validateAndInsert(card) { error ->
             requireContext().showToast(error)
-            requireActivity().onBackPressed()
         }
     }
 

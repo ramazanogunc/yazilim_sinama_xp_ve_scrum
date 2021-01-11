@@ -64,7 +64,7 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
             CardType.CHECK -> R.id.check
             CardType.DONE -> R.id.done
         }
-        activeBoardMenuId?.let { popup.menu.findItem(it).isEnabled = false }
+        activeBoardMenuId.let { popup.menu.findItem(it).isEnabled = false }
 
 
         popup.setOnMenuItemClickListener { menuItem ->
@@ -87,7 +87,7 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
     }
 
     private fun onItemClick(card: Card) {
-
+        (parentFragment as BoardMasterFragment).navigateEditFragment(card.cardId)
     }
 
     override fun onDestroy() {

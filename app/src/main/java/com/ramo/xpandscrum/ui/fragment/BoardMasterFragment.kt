@@ -49,6 +49,7 @@ class BoardMasterFragment : Fragment() {
         )
     }
 
+
     private fun initUi() {
         with(masterBoardBinding) {
             this!!.toolbar.title = projectName

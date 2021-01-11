@@ -89,9 +89,7 @@
 
         </LinearLayout>
 
-
     </ScrollView>
-
     <Button
         android:id="@+id/btnJobTrace"
         android:layout_width="match_parent"

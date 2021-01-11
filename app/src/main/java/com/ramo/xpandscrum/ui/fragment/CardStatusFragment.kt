@@ -55,8 +55,6 @@ class CardStatusFragment: Fragment() {
     }
 
 
-
-
     private fun onItemClick(cardStatus: CardStatus) {
 
     }

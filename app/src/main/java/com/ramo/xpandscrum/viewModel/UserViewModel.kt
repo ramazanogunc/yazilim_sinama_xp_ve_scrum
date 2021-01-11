@@ -12,6 +12,7 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
     val allUsers = userRepository.allUsers
 
     fun insert(user: User) = viewModelScope.launch { userRepository.insert(user) }
+
 }
 
 
