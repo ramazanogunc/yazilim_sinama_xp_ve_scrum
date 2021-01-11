@@ -13,12 +13,8 @@ import androidx.navigation.fragment.navArgs
 import com.ramo.xpandscrum.*
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.CardRepository
-import com.ramo.xpandscrum.database.repository.CardStatusRepository
 import com.ramo.xpandscrum.databinding.FragmentAddEditCardBinding
 import com.ramo.xpandscrum.model.Card
-import com.ramo.xpandscrum.model.CardStatus
-import com.ramo.xpandscrum.viewModel.CardStatusViewModel
-import com.ramo.xpandscrum.viewModel.CardStatusViewModelFactory
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
 import java.util.*
@@ -35,13 +31,6 @@ class EditCardFragment : Fragment() {
             requireActivity(),
             CardViewModelFactory(CardRepository(AppDatabase.getInstance(requireContext()).cardDao))
         ).get(CardViewModel::class.java)
-    }
-
-    private val cardStatusViewModel: CardStatusViewModel by lazy {
-        ViewModelProvider(
-            requireActivity(),
-            CardStatusViewModelFactory(CardStatusRepository(AppDatabase.getInstance(requireContext()).cardStatusDao))
-        ).get(CardStatusViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -68,8 +57,8 @@ class EditCardFragment : Fragment() {
 
     private fun onJobTraceClick() {
         val bundle = bundleOf("cardId" to cardId)
+        bundle.putSerializable("cardType", card?.cardType)
         findNavController().navigate(R.id.action_editCardFragment_to_cardStatusFragment, bundle)
-        cardStatusViewModel.insert(getStatusCard())
     }
 
     private fun onSaveClick() {
@@ -79,15 +68,6 @@ class EditCardFragment : Fragment() {
         requireActivity().onBackPressed()
     }
 
-    private fun getStatusCard(): CardStatus {
-        return CardStatus(
-            cardId,
-            card?.cardType,
-            binding!!.description.text.toString(),
-            dateConvert(),
-            1
-        )
-    }
 
     private fun getSetData(card: Card) {
         with(binding!!) {
