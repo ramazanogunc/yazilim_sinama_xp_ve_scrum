@@ -33,7 +33,7 @@ class CardListAdapter(
 class CardViewHolder(
     private val itemBinding: ItemBoardBinding,
     private val onItemClick: (card: Card) -> Unit,
-    private val onEditClick: (card: Card) -> Unit,
+    private val onDeleteClick: (card: Card) -> Unit,
     private val onMoveClick: (card: Card, v: View) -> Unit
 ) :
     RecyclerView.ViewHolder(itemBinding.root) {
@@ -41,8 +41,8 @@ class CardViewHolder(
     fun bind(card: Card) {
         with(itemBinding) {
             cardName.text = card.name
-            btnEdit.setOnClickListener { onEditClick(card) }
-            btnMove.setOnClickListener { onMoveClick(card,it) }
+            btnDele.setOnClickListener { onDeleteClick(card) }
+            btnMove.setOnClickListener { onMoveClick(card, it) }
             itemView.setOnClickListener { onItemClick(card) }
         }
     }

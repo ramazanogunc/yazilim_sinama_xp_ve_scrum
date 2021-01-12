@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:enabled="false"
-                    android:hint="Tahmini Tarihi"
+                    android:hint="Tahmini Süre(Dakika)"
                     android:padding="10dp" />
             </com.google.android.material.textfield.TextInputLayout>
 

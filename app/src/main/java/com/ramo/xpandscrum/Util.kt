@@ -25,13 +25,13 @@ fun getFakeUsers(): List<User> {
 
 @SuppressLint("SimpleDateFormat")
 fun Date.getCurrentDate(): String {
-    val date = SimpleDateFormat("dd/M/yyyy hh:mm")
+    val date = SimpleDateFormat("dd/M/yyyy HH:mm")
     return date.format(this)
 }
 
 @SuppressLint("SimpleDateFormat")
 fun dateConvert(): Date {
-    val date = SimpleDateFormat("dd/M/yyyy hh:mm").parse(Date().getCurrentDate())
+    val date = SimpleDateFormat("dd/M/yyyy HH:mm").parse(Date().getCurrentDate())
     return date!!
 }
 

@@ -42,7 +42,7 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CardListAdapter(::onItemClick, ::onEditClick, ::onMoveClick)
+        val adapter = CardListAdapter(::onItemClick, ::onDeleteClick, ::onMoveClick)
         boardBinding?.let {
             it.recyclerViewBoard.adapter = adapter
             it.recyclerViewBoard.layoutManager = LinearLayoutManager(requireContext())
@@ -82,8 +82,8 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
         popup.show()
     }
 
-    private fun onEditClick(card: Card) {
-        (parentFragment as BoardMasterFragment).navigateEditFragment(card.cardId)
+    private fun onDeleteClick(card: Card) {
+        cardViewModel.delete(card.cardId)
     }
 
     private fun onItemClick(card: Card) {

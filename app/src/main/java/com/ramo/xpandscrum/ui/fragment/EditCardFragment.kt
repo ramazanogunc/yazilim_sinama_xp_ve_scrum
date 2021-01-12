@@ -50,8 +50,10 @@ class EditCardFragment : Fragment() {
         binding!!.btnSave.setOnClickListener { onSaveClick() }
         binding!!.btnJobTrace.setOnClickListener { onJobTraceClick() }
         cardViewModel.getCard(cardId).observe(viewLifecycleOwner) {
-            card = it
-            getSetData(it)
+            it.let {
+                card = it
+                setData(it)
+            }
         }
     }
 
@@ -69,13 +71,13 @@ class EditCardFragment : Fragment() {
     }
 
 
-    private fun getSetData(card: Card) {
+    private fun setData(card: Card) {
         with(binding!!) {
             this.name.setText(card.name)
             this.description.setText(card.description)
             this.note.setText(card.note)
             this.date.setText(Date().getCurrentDate())
-            this.predictDate.setText("Tahmini Süre(dakika) = " + card.predictedMinute.toString())
+            this.predictDate.setText(card.predictedMinute.toString())
         }
     }
 
