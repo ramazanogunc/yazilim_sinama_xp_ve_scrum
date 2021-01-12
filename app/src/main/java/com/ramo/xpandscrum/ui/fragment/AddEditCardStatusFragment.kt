@@ -1,6 +1,7 @@
 package com.ramo.xpandscrum.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +35,7 @@ class AddEditCardStatusFragment : Fragment() {
             )
         ).get(CardStatusViewModel::class.java)
     }
-    private var cardStatusId :Int? = null
+    private var cardStatusId: Int? = null
     private var cardId = 0
     private var selectedUserId = 0
     private var mode = 0
@@ -58,20 +59,30 @@ class AddEditCardStatusFragment : Fragment() {
 
         binding!!.date.setText(Date().getCurrentDate())
         binding!!.btnSave.setOnClickListener { onBtnSaveClick() }
-        cardStatusViewModel.allUsers.observe(viewLifecycleOwner) { userList ->
-            userList?.let { prepareSpinner(it) }
-        }
 
-        if (mode == MODE_EDIT){
-            cardStatusViewModel.get(cardStatusId!!).observe(viewLifecycleOwner){ cardStatus ->
-                cardStatus?.let { setDataToUi(cardStatus) }
+        if (mode == MODE_EDIT) {
+            // get card status
+            cardStatusViewModel.get(cardStatusId!!).observe(viewLifecycleOwner) { cardStatus ->
+                cardStatus?.let { cardStatus->
+                    setDataToUi(cardStatus)
+                    selectedUserId = cardStatus.userId
+                    // prepare spinner for selected user
+                    cardStatusViewModel.allUsers.observe(viewLifecycleOwner) { userList ->
+                        userList?.let { prepareSpinner(it) }
+                    }
+                }
+            }
+        }
+        if (mode == MODE_ADD){
+            cardStatusViewModel.allUsers.observe(viewLifecycleOwner) { userList ->
+                userList?.let { prepareSpinner(it) }
             }
         }
     }
 
     private fun setDataToUi(cardStatus: CardStatus) {
         binding?.let {
-            it.description.setText(cardStatus?.description)
+            it.description.setText(cardStatus.description)
         }
     }
 
@@ -92,13 +103,24 @@ class AddEditCardStatusFragment : Fragment() {
                 ) {
                     selectedUserId = userList[position].userId
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    selectedUserId = 0
+                    //selectedUserId = 0
                 }
-
             }
+        setSpinnerSelectedUser(userList)
     }
+
+    private fun setSpinnerSelectedUser(userList: List<User>){
+        if (mode == MODE_EDIT && selectedUserId != 0) {
+            Log.e("prepareSpinner:if", selectedUserId.toString())
+
+            for (index in userList.indices) {
+                if (userList[index].userId == selectedUserId)
+                    binding!!.technicalPerson.setSelection(index)
+            }
+        }
+    }
+
 
     private fun onBtnSaveClick() {
         if (cardId != 0 && selectedUserId != 0) {
@@ -119,7 +141,7 @@ class AddEditCardStatusFragment : Fragment() {
     }
 
     private fun update() {
-        cardStatusId?.let{
+        cardStatusId?.let {
             val cardStatus = getCardStatusFromUi()
             cardStatus.cardStatusId = it
             cardStatusViewModel.update(cardStatus)

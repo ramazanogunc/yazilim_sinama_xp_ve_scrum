@@ -56,19 +56,9 @@ class AddCardFragment : Fragment() {
         binding!!.date.setText(Date().getCurrentDate())
         binding!!.predictDate.hide()
         binding!!.btnJobTrace.hide()
-        setSpinner()
     }
 
-    private fun setSpinner() {
-        val names = mutableListOf<String>()
-        userViewModel.allUsers.observe(viewLifecycleOwner, {
-            for (i in it)
-                names.add(i.name)
-            val spinnerAdapter =
-                ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, names)
-            binding!!.technicalPerson.adapter = spinnerAdapter
-        })
-    }
+
 
     private fun onSaveClick() {
         val card = getDataFromUi()

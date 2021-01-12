@@ -30,14 +30,21 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/projectName"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/border_rounded"
-                android:hint="Proje İsm"
-                android:padding="10dp" />
+                android:layout_marginTop="30dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/projectName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Proje İsm"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <View
                 android:layout_width="match_parent"
