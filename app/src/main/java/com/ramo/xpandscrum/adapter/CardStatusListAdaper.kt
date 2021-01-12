@@ -39,7 +39,7 @@ class CardStatusViewHolder(
     fun bind(cardStatus: CardStatus) {
         with(itemBinding) {
             itemView.setOnClickListener { onItemClick(cardStatus) }
-//            itemBinding.btnDelete.setOnClickListener { onDeleteClick(cardStatus) }
+            itemBinding.btnDelete.setOnClickListener { onDeleteClick(cardStatus) }
             this.cardstatusDate.text = cardStatus.date?.getCurrentDate()
             this.cardstatusType.text = cardStatus.cardType?.name
             this.cardstatusDesc.text = cardStatus.description.toString()

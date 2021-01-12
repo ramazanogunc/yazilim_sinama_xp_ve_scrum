@@ -73,6 +73,7 @@ class CardStatusFragment : Fragment() {
     }
 
     private fun onDeleteClick(cardStatus: CardStatus) {
+        cardStatusViewModel.delete(cardStatus.cardStatusId)
 
     }
 
