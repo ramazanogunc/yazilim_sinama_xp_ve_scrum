@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ramo.xpandscrum.*
@@ -56,17 +55,26 @@ class AddCardFragment : Fragment() {
         binding!!.date.setText(Date().getCurrentDate())
         binding!!.predictDate.hide()
         binding!!.btnJobTrace.hide()
+
     }
 
-
-
     private fun onSaveClick() {
-        val card = getDataFromUi()
-        requireActivity().showToast(card.toString())
-        requireActivity().onBackPressed()
-        cardViewModel.validateAndInsert(card) { error ->
-            requireContext().showToast(error)
+
+        validateAndDo(
+            listOf(
+                binding!!.name,
+                binding!!.description,
+                binding!!.note
+            )
+        ) {
+            val card = getDataFromUi()
+            requireActivity().showToast(card.toString())
+            requireActivity().onBackPressed()
+            cardViewModel.validateAndInsert(card) { error ->
+                requireContext().showToast(error)
+            }
         }
+
     }
 
     private fun getDataFromUi(): Card {

@@ -19,6 +19,7 @@ import com.ramo.xpandscrum.model.CardStatus
 import com.ramo.xpandscrum.model.CardType
 import com.ramo.xpandscrum.model.User
 import com.ramo.xpandscrum.showToast
+import com.ramo.xpandscrum.validateAndDo
 import com.ramo.xpandscrum.viewModel.CardStatusViewModel
 import com.ramo.xpandscrum.viewModel.CardStatusViewModelFactory
 import java.util.*
@@ -91,7 +92,7 @@ class AddEditCardStatusFragment : Fragment() {
             requireContext(),
             android.R.layout.simple_spinner_item,
             userList.map { user -> user.name })
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding!!.technicalPerson.adapter = adapter
         binding!!.technicalPerson.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -123,11 +124,19 @@ class AddEditCardStatusFragment : Fragment() {
 
 
     private fun onBtnSaveClick() {
+
         if (cardId != 0 && selectedUserId != 0) {
-            if (mode == MODE_ADD)
-                insert()
-            else if (mode == MODE_EDIT)
-                update()
+
+            validateAndDo(
+                listOf(
+                    binding!!.description
+                )
+            ) {
+                if (mode == MODE_ADD)
+                    insert()
+                else if (mode == MODE_EDIT)
+                    update()
+            }
 
         } else {
             requireContext().showToast("Eksikleri lütfen doldurun")

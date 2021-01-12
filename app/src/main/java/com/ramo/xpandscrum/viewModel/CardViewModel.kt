@@ -24,8 +24,7 @@ class CardViewModel(private val cardRepository: CardRepository) : ViewModel() {
     fun delete(cardId: Int) = viewModelScope.launch { cardRepository.delete(cardId) }
 
     fun validateAndInsert(card: Card, block: (message: String) -> Unit) {
-        // if validate()
-        // else
+
         insert(card)
     }
 }

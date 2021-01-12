@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramo.xpandscrum.R
 import com.ramo.xpandscrum.adapter.CardListAdapter
+import com.ramo.xpandscrum.calculateRealMinute
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.CardRepository
 import com.ramo.xpandscrum.databinding.FragmentBoardBinding
@@ -76,6 +77,10 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
                 R.id.done -> CardType.DONE
                 else -> CardType.TODO
             }
+            if (card.cardType == CardType.DONE) {
+                card.realMinute = calculateRealMinute(card.date)
+            }
+
             cardViewModel.update(card)
             true
         }

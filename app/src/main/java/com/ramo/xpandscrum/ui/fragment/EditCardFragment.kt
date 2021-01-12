@@ -10,14 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.ramo.xpandscrum.*
+import com.ramo.xpandscrum.R
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.CardRepository
 import com.ramo.xpandscrum.databinding.FragmentAddEditCardBinding
+import com.ramo.xpandscrum.getCurrentDate
 import com.ramo.xpandscrum.model.Card
+import com.ramo.xpandscrum.predictDateFromDescription
+import com.ramo.xpandscrum.showToast
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
-import java.util.*
 
 class EditCardFragment : Fragment() {
 
@@ -76,8 +78,10 @@ class EditCardFragment : Fragment() {
             this.name.setText(card.name)
             this.description.setText(card.description)
             this.note.setText(card.note)
-            this.date.setText(Date().getCurrentDate())
+            this.date.setText(card.date.getCurrentDate())
             this.predictDate.setText(card.predictedMinute.toString())
+            if (card.realMinute != null)
+                this.realMinute.setText(card.realMinute.toString())
         }
     }
 
@@ -86,7 +90,6 @@ class EditCardFragment : Fragment() {
             name = binding!!.name.text.toString()
             description = binding!!.description.text.toString()
             note = binding!!.note.text.toString()
-            date = dateConvert()
             predictedMinute = predictDateFromDescription(binding!!.description.text.toString())
         }
     }

@@ -11,6 +11,7 @@ import com.ramo.xpandscrum.database.repository.ProjectRepository
 import com.ramo.xpandscrum.databinding.FragmentAddEditProjectBinding
 import com.ramo.xpandscrum.model.Project
 import com.ramo.xpandscrum.showToast
+import com.ramo.xpandscrum.validateAndDo
 import com.ramo.xpandscrum.viewModel.MainViewModel
 import com.ramo.xpandscrum.viewModel.MainViewModelFactory
 
@@ -45,12 +46,20 @@ class AddProjectFragment : Fragment() {
     }
 
     private fun onSaveClick() {
-        validateInputAndRun {
-            val project = getProjectFromUi()
-            mainViewModel.insert(project)
-            requireContext().showToast("Kaydedildi")
-            requireActivity().onBackPressed()
+
+        validateAndDo(
+            listOf(
+                addBinding!!.projectName
+            )
+        ) {
+            validateInputAndRun {
+                val project = getProjectFromUi()
+                mainViewModel.insert(project)
+                requireContext().showToast("Kaydedildi")
+                requireActivity().onBackPressed()
+            }
         }
+
     }
 
     private fun validateInputAndRun(block: () -> Unit) {
@@ -62,8 +71,6 @@ class AddProjectFragment : Fragment() {
             else
                 block()
         }
-
-
     }
 
     private fun getProjectFromUi(): Project {
