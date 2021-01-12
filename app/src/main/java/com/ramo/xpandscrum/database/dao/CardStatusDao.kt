@@ -3,11 +3,13 @@ package com.ramo.xpandscrum.database.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.ramo.xpandscrum.model.CardStatus
+import com.ramo.xpandscrum.model.CardStatusAndUser
 
 @Dao
 interface CardStatusDao {
+    @Transaction
     @Query("SELECT * FROM card_status_table WHERE cardId=:cardId")
-    fun getAllCardStatusCardId(cardId: Int): LiveData<List<CardStatus>>
+    fun getAllCardStatusCardId(cardId: Int): LiveData<List<CardStatusAndUser>>
 
     @Query("SELECT * FROM card_status_table WHERE cardStatusId=:id")
     fun get(id: Int): LiveData<CardStatus>

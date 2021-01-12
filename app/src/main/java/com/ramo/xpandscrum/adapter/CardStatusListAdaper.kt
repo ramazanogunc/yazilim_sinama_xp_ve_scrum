@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ramo.xpandscrum.databinding.ItemCardStatusBinding
 import com.ramo.xpandscrum.getCurrentDate
-import com.ramo.xpandscrum.model.CardStatus
+import com.ramo.xpandscrum.model.CardStatusAndUser
 
 
 class CardStatusListAdaper(
-    private val onItemClick: (cardStatus: CardStatus) -> Unit,
-    private val onDeleteClick: (cardStatus: CardStatus) -> Unit
+    private val onItemClick: (cardStatusAndUser: CardStatusAndUser) -> Unit,
+    private val onDeleteClick: (cardStatusAndUser: CardStatusAndUser) -> Unit
 ) :
-    ListAdapter<CardStatus, CardStatusViewHolder>(CardStatusComparator()) {
+    ListAdapter<CardStatusAndUser, CardStatusViewHolder>(CardStatusComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardStatusViewHolder {
         val itemBinding =
@@ -31,29 +31,29 @@ class CardStatusListAdaper(
 
 class CardStatusViewHolder(
     private val itemBinding: ItemCardStatusBinding,
-    private val onItemClick: (cardStatus: CardStatus) -> Unit,
-    private val onDeleteClick: (cardStatus: CardStatus) -> Unit
+    private val onItemClick: (cardStatusAndUser: CardStatusAndUser) -> Unit,
+    private val onDeleteClick: (cardStatusAndUser: CardStatusAndUser) -> Unit
 ) :
     RecyclerView.ViewHolder(itemBinding.root) {
 
-    fun bind(cardStatus: CardStatus) {
+    fun bind(cardStatusAndUser: CardStatusAndUser) {
         with(itemBinding) {
-            itemView.setOnClickListener { onItemClick(cardStatus) }
-            itemBinding.btnDelete.setOnClickListener { onDeleteClick(cardStatus) }
-            this.cardstatusDate.text = cardStatus.date?.getCurrentDate()
-            this.cardstatusType.text = cardStatus.cardType?.name
-            this.cardstatusDesc.text = cardStatus.description.toString()
-            this.cardstatusUser.text = cardStatus.userId.toString()
+            itemView.setOnClickListener { onItemClick(cardStatusAndUser) }
+            itemBinding.btnDelete.setOnClickListener { onDeleteClick(cardStatusAndUser) }
+            this.cardstatusDate.text = cardStatusAndUser.cardStatus?.date?.getCurrentDate()
+            this.cardstatusType.text = cardStatusAndUser.cardStatus?.cardType?.name
+            this.cardstatusDesc.text = cardStatusAndUser.cardStatus?.description.toString()
+            this.cardstatusUser.text = cardStatusAndUser.user?.name
         }
     }
 }
 
-class CardStatusComparator : DiffUtil.ItemCallback<CardStatus>() {
-    override fun areItemsTheSame(oldItem: CardStatus, newItem: CardStatus): Boolean {
+class CardStatusComparator : DiffUtil.ItemCallback<CardStatusAndUser>() {
+    override fun areItemsTheSame(oldItem: CardStatusAndUser, newItem: CardStatusAndUser): Boolean {
         return oldItem === newItem
     }
 
-    override fun areContentsTheSame(oldItem: CardStatus, newItem: CardStatus): Boolean {
+    override fun areContentsTheSame(oldItem: CardStatusAndUser, newItem: CardStatusAndUser): Boolean {
         return oldItem == newItem
     }
 }

@@ -15,7 +15,7 @@ import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.CardStatusRepository
 import com.ramo.xpandscrum.database.repository.UserRepository
 import com.ramo.xpandscrum.databinding.FragmentCardStatusBinding
-import com.ramo.xpandscrum.model.CardStatus
+import com.ramo.xpandscrum.model.CardStatusAndUser
 import com.ramo.xpandscrum.model.CardType
 import com.ramo.xpandscrum.viewModel.CardStatusViewModel
 import com.ramo.xpandscrum.viewModel.CardStatusViewModelFactory
@@ -54,26 +54,25 @@ class CardStatusFragment : Fragment() {
             recyclerViewCardStatus.layoutManager = LinearLayoutManager(requireContext())
         }
 
-        cardStatusViewModel.getAllCardStatusCardId(cardId)
-            .observe(viewLifecycleOwner) { cardStatusList ->
-                cardStatusList.let { adapter.submitList(it) }
-            }
+        cardStatusViewModel.getAllCardStatusCardId(cardId).observe(viewLifecycleOwner,{
+            it.let { adapter.submitList(it) }
+        })
     }
 
 
-    private fun onItemClick(cardStatus: CardStatus) {
+    private fun onItemClick(cardStatus: CardStatusAndUser) {
         val bundle = bundleOf("cardId" to cardId)
         bundle.putInt("mode", 1)
         bundle.putSerializable("cardType", arguments?.get("cardType") as CardType)
-        bundle.putInt("cardStatusId", cardStatus.cardStatusId)
+        bundle.putInt("cardStatusId", cardStatus.cardStatus!!.cardStatusId)
         findNavController().navigate(
             R.id.action_cardStatusFragment_to_addEditCardStatusFragment,
             bundle
         )
     }
 
-    private fun onDeleteClick(cardStatus: CardStatus) {
-        cardStatusViewModel.delete(cardStatus.cardStatusId)
+    private fun onDeleteClick(cardStatus: CardStatusAndUser) {
+        cardStatusViewModel.delete(cardStatus.cardStatus!!.cardStatusId)
 
     }
 

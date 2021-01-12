@@ -2,6 +2,7 @@ package com.ramo.xpandscrum.model
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.util.*
 
@@ -14,7 +15,8 @@ import java.util.*
         onDelete = ForeignKey.CASCADE,
         onUpdate = ForeignKey.CASCADE
     )
-    ]
+    ],
+    indices = [ Index(value = ["projectId"], name = "i_projectId") ]
 )
 data class Card(
     var name: String,

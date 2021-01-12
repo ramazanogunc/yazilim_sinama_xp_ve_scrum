@@ -24,8 +24,8 @@ import java.util.*
     ]
 )
 data class CardStatus(
-    val cardId: Int,
-    val userId: Int,
+    val cardId: Int?,
+    val userId: Int?,
     val description: String? = null,
     val cardType: CardType? = null,
     val date: Date? = null
