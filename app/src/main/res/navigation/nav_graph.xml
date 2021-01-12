@@ -38,7 +38,7 @@
         android:label="EditProjectFragment" />
     <fragment
         android:id="@+id/addCardFragment"
-        android:name="com.ramo.xpandscrum.ui.fragment.AddCardFragment"
+        android:name="com.ramo.xpandscrum.ui.fragment.AddEditCardFragment"
         android:label="AddCardFragment" />
     <fragment
         android:id="@+id/editCardFragment"
@@ -62,6 +62,6 @@
     </fragment>
     <fragment
         android:id="@+id/addEditCardStatusFragment"
-        android:name="com.ramo.xpandscrum.ui.fragment.AddEditCardStatusFragment"
+        android:name="com.ramo.xpandscrum.ui.fragment.AddCardStatusFragment"
         android:label="AddEditCardStatusFragment" />
 </navigation>

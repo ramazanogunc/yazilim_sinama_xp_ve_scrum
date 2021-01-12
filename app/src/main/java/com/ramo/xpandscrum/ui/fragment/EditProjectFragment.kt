@@ -11,6 +11,7 @@ import com.ramo.xpandscrum.database.repository.CardRepository
 import com.ramo.xpandscrum.databinding.FragmentAddEditProjectBinding
 import com.ramo.xpandscrum.model.Project
 import com.ramo.xpandscrum.showToast
+import com.ramo.xpandscrum.validateAndDo
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
 import com.ramo.xpandscrum.viewModel.MainViewModel
 
@@ -50,12 +51,20 @@ class EditProjectFragment : Fragment() {
     }
 
     private fun onSaveClick() {
-        validateInputAndRun {
-            val project = getProjectFromUi()
-            mainViewModel.update(project)
-            requireContext().showToast("Kaydedildi")
-            requireActivity().onBackPressed()
+
+        validateAndDo(
+            listOf(
+                editBinding!!.projectName
+            )
+        ) {
+            validateInputAndRun {
+                val project = getProjectFromUi()
+                mainViewModel.update(project)
+                requireContext().showToast("Kaydedildi")
+                requireActivity().onBackPressed()
+            }
         }
+
     }
 
     private fun validateInputAndRun(block: () -> Unit) {

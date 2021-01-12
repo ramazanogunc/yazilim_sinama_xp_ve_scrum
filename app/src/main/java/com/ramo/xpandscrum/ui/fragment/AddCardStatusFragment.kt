@@ -24,7 +24,7 @@ import com.ramo.xpandscrum.viewModel.CardStatusViewModel
 import com.ramo.xpandscrum.viewModel.CardStatusViewModelFactory
 import java.util.*
 
-class AddEditCardStatusFragment : Fragment() {
+class AddCardStatusFragment : Fragment() {
 
     private var binding: FragmentAddEditCardStatusBinding? = null
     private val cardStatusViewModel: CardStatusViewModel by lazy {

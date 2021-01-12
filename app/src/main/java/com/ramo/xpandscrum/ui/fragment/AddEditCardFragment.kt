@@ -19,7 +19,7 @@ import com.ramo.xpandscrum.viewModel.UserViewModel
 import com.ramo.xpandscrum.viewModel.UserViewModelFactory
 import java.util.*
 
-class AddCardFragment : Fragment() {
+class AddEditCardFragment : Fragment() {
 
     private var projectId: Int = 0
     private var binding: FragmentAddEditCardBinding? = null

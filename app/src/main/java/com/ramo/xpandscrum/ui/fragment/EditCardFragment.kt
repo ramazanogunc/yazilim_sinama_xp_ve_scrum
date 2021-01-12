@@ -10,14 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.ramo.xpandscrum.R
+import com.ramo.xpandscrum.*
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.CardRepository
 import com.ramo.xpandscrum.databinding.FragmentAddEditCardBinding
-import com.ramo.xpandscrum.getCurrentDate
 import com.ramo.xpandscrum.model.Card
-import com.ramo.xpandscrum.predictDateFromDescription
-import com.ramo.xpandscrum.showToast
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
 
@@ -66,10 +63,19 @@ class EditCardFragment : Fragment() {
     }
 
     private fun onSaveClick() {
-        val card = getDatFromUi()
-        requireActivity().showToast(card.toString())
-        cardViewModel.update(card)
-        requireActivity().onBackPressed()
+
+        validateAndDo(
+            listOf(
+                binding!!.name,
+                binding!!.description,
+                binding!!.note
+            )
+        ) {
+            val card = getDatFromUi()
+            requireActivity().showToast(card.toString())
+            cardViewModel.update(card)
+            requireActivity().onBackPressed()
+        }
     }
 
 
