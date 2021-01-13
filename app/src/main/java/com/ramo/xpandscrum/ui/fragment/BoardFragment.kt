@@ -55,6 +55,7 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
             }
     }
 
+    // card ın gerekli type göre ayarlanması durumu
     private fun onMoveClick(card: Card, v: View) {
         val popup = PopupMenu(v.context, v)
         popup.menuInflater.inflate(R.menu.menu_popup_move, popup.menu)
@@ -67,7 +68,7 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
         }
         activeBoardMenuId.let { popup.menu.findItem(it).isEnabled = false }
 
-
+        // card tye değiştirmek için ekrana cıkan pop up
         popup.setOnMenuItemClickListener { menuItem ->
             card.cardType = when (menuItem?.itemId) {
                 R.id.todo -> CardType.TODO

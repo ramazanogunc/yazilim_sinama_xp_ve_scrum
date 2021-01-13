@@ -88,18 +88,21 @@ class MainFragment : Fragment() {
         findNavController().navigate(R.id.action_mainFragment_to_addProjectFragment)
     }
 
+    // tıklanan itemın project id sini bundle ile boardmastera aktarılması
     private fun onItemClick(project: Project) {
         val bundle = bundleOf("id" to project._id)
         bundle.putString("name", project.name)
         findNavController().navigate(R.id.action_mainFragment_to_boardMasterFragment, bundle)
     }
 
+    // edit butonunda gerekli işlemlerin yapılması
     private fun onEditClick(project: Project) {
         val bundle = bundleOf("projectId" to project._id)
         bundle.putString("name", project.name)
         findNavController().navigate(R.id.action_mainFragment_to_editProjectFragment, bundle)
     }
 
+    // delete butonuna tıklandığında database den veriyi silmesi
     private fun onDeleteClick(project: Project) {
         mainViewModel.delete(project._id)
     }

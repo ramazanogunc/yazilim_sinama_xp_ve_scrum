@@ -1,6 +1,5 @@
 package com.ramo.xpandscrum.ui.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +40,6 @@ class EditCardFragment : Fragment() {
         return binding?.root
     }
 
-    @SuppressLint("SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -62,6 +60,7 @@ class EditCardFragment : Fragment() {
         findNavController().navigate(R.id.action_editCardFragment_to_cardStatusFragment, bundle)
     }
 
+
     private fun onSaveClick() {
 
         validateAndDo(
@@ -78,7 +77,7 @@ class EditCardFragment : Fragment() {
         }
     }
 
-
+    //  card bilgilerini doldurmak
     private fun setData(card: Card) {
         with(binding!!) {
             this.name.setText(card.name)
@@ -91,6 +90,7 @@ class EditCardFragment : Fragment() {
         }
     }
 
+    // doldurulan datayı alıp card a eşitlemek
     private fun getDatFromUi(): Card {
         return card!!.apply {
             name = binding!!.name.text.toString()

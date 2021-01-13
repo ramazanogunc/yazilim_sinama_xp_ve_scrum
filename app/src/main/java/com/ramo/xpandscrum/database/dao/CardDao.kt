@@ -7,6 +7,7 @@ import com.ramo.xpandscrum.model.CardType
 
 @Dao
 interface CardDao {
+
     @Query("SELECT * FROM card_table WHERE projectId=:projectId AND cardType=:cardType")
     fun getAllCardFromByProjectAndCardType(projectId: Int, cardType: CardType): LiveData<List<Card>>
 

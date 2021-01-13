@@ -22,6 +22,7 @@ import java.util.*
 class AddEditCardFragment : Fragment() {
 
     private var projectId: Int = 0
+
     private var binding: FragmentAddEditCardBinding? = null
 
     private val cardViewModel: CardViewModel by lazy {
@@ -58,8 +59,9 @@ class AddEditCardFragment : Fragment() {
 
     }
 
-    private fun onSaveClick() {
 
+    // kaybet butonunda text inputların kontolu durumunda gerekli işlemlerin yapılması
+    private fun onSaveClick() {
         validateAndDo(
             listOf(
                 binding!!.name,
@@ -77,6 +79,7 @@ class AddEditCardFragment : Fragment() {
 
     }
 
+    // textlere girilen değerler ile card modelini doldurmak
     private fun getDataFromUi(): Card {
         return Card(
             binding!!.name.text.toString(),

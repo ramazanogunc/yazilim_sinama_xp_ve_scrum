@@ -45,6 +45,7 @@ class AddProjectFragment : Fragment() {
 
     }
 
+    // validasyon durumuna göre gerekli işlemlerin yapılması
     private fun onSaveClick() {
 
         validateAndDo(
@@ -62,6 +63,7 @@ class AddProjectFragment : Fragment() {
 
     }
 
+    // max text değerlerin kontrolu saglanmıstır
     private fun validateInputAndRun(block: () -> Unit) {
         addBinding?.let {
             if (it.projectName.text.isNullOrEmpty())

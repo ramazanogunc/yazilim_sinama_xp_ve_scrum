@@ -57,6 +57,7 @@ class BoardMasterFragment : Fragment() {
         }
     }
 
+    //viewpager adapter eşitlenmesi
     private fun initTabLayout() {
         val adapter = BoardMasterFragmentAdapter(childFragmentManager, projectId)
         with(masterBoardBinding) {
@@ -65,6 +66,7 @@ class BoardMasterFragment : Fragment() {
         }
     }
 
+    //fabclick eventinin saplanması
     private fun onFabClick() {
         val bundle = bundleOf("projectId" to projectId)
         findNavController().navigate(R.id.action_boardMasterFragment_to_addCardFragment, bundle)

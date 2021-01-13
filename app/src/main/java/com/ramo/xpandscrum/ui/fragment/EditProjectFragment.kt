@@ -50,6 +50,7 @@ class EditProjectFragment : Fragment() {
         }
     }
 
+    // validasyon durumuna göre gerekli işlemlerin sağlanması
     private fun onSaveClick() {
 
         validateAndDo(
@@ -67,6 +68,7 @@ class EditProjectFragment : Fragment() {
 
     }
 
+    // textlerin max boyut kontrolu
     private fun validateInputAndRun(block: () -> Unit) {
         editBinding?.let {
             if (it.projectName.text.isNullOrEmpty())

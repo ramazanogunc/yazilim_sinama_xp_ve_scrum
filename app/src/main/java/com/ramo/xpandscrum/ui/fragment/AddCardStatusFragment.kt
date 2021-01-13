@@ -81,12 +81,14 @@ class AddCardStatusFragment : Fragment() {
         }
     }
 
+    // ui daki gerekli alanı doldurmak için kullanılan fonk
     private fun setDataToUi(cardStatus: CardStatus) {
         binding?.let {
             it.description.setText(cardStatus.description)
         }
     }
 
+    // kullanıcıları spinner da sunmak için kullanılan fonk
     private fun prepareSpinner(userList: List<User>) {
         val adapter = ArrayAdapter(
             requireContext(),
@@ -104,6 +106,7 @@ class AddCardStatusFragment : Fragment() {
                 ) {
                     selectedUserId = userList[position].userId
                 }
+
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     //selectedUserId = 0
                 }
@@ -111,6 +114,7 @@ class AddCardStatusFragment : Fragment() {
         setSpinnerSelectedUser(userList)
     }
 
+    // spinerlerin içini doldurmak
     private fun setSpinnerSelectedUser(userList: List<User>){
         if (mode == MODE_EDIT && selectedUserId != 0) {
             Log.e("prepareSpinner:if", selectedUserId.toString())
@@ -122,7 +126,7 @@ class AddCardStatusFragment : Fragment() {
         }
     }
 
-
+    // validasyon durumuna göre işlem yapılmaktadır
     private fun onBtnSaveClick() {
 
         if (cardId != 0 && selectedUserId != 0) {
@@ -143,6 +147,7 @@ class AddCardStatusFragment : Fragment() {
         }
     }
 
+
     private fun insert() {
         val cardStatus = getCardStatusFromUi()
         cardStatusViewModel.insert(cardStatus)
@@ -158,6 +163,7 @@ class AddCardStatusFragment : Fragment() {
         }
     }
 
+    // cardstatus döndüren fonk
     private fun getCardStatusFromUi(): CardStatus {
         return CardStatus(
             cardId,
