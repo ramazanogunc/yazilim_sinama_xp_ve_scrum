@@ -6,6 +6,10 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.util.*
 
+/*
+kart bilgilerini içeren model
+aynı zamanda veritabanı için de kullanılır
+ */
 @Entity(
     tableName = "card_table",
     foreignKeys = [ForeignKey(

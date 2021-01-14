@@ -9,7 +9,11 @@ import com.ramo.xpandscrum.databinding.ItemCardStatusBinding
 import com.ramo.xpandscrum.getCurrentDate
 import com.ramo.xpandscrum.model.CardStatusAndUser
 
-
+/*
+iş takibi liste adaptörüdür.
+öğe tıklaması
+silme tıklaması içerir
+ */
 class CardStatusListAdaper(
     private val onItemClick: (cardStatusAndUser: CardStatusAndUser) -> Unit,
     private val onDeleteClick: (cardStatusAndUser: CardStatusAndUser) -> Unit
@@ -29,6 +33,11 @@ class CardStatusListAdaper(
 
 }
 
+/*
+iş takibi görünümünü ekranda gösterir
+ilgili tıklamalrı bind çalıştırır.
+ilgili bilgielri ekrana set eder
+ */
 class CardStatusViewHolder(
     private val itemBinding: ItemCardStatusBinding,
     private val onItemClick: (cardStatusAndUser: CardStatusAndUser) -> Unit,
@@ -48,6 +57,10 @@ class CardStatusViewHolder(
     }
 }
 
+/*
+iş takibi öğesini akrşılaştırır.
+Adapter bağımlı olduğu için yazıldı
+ */
 class CardStatusComparator : DiffUtil.ItemCallback<CardStatusAndUser>() {
     override fun areItemsTheSame(oldItem: CardStatusAndUser, newItem: CardStatusAndUser): Boolean {
         return oldItem === newItem

@@ -5,6 +5,10 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.util.*
 
+/*
+iş takibi bilgilerini içeren model
+aynı zamanda veritabanı için de kullanılır
+ */
 @Entity(
     tableName = "card_status_table",
     foreignKeys = [ForeignKey(
