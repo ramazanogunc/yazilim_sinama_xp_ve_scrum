@@ -40,10 +40,10 @@ class CardStatusViewHolder(
         with(itemBinding) {
             itemView.setOnClickListener { onItemClick(cardStatusAndUser) }
             itemBinding.btnDelete.setOnClickListener { onDeleteClick(cardStatusAndUser) }
-            this.cardstatusDate.text = cardStatusAndUser.cardStatus?.date?.getCurrentDate()
-            this.cardstatusType.text = cardStatusAndUser.cardStatus?.cardType?.name
-            this.cardstatusDesc.text = cardStatusAndUser.cardStatus?.description.toString()
-            this.cardstatusUser.text = cardStatusAndUser.user?.name
+            this.cardstatusDate.text = cardStatusAndUser.cardStatus.date?.getCurrentDate()
+            this.cardstatusType.text = cardStatusAndUser.cardStatus.cardType?.name
+            this.cardstatusDesc.text = cardStatusAndUser.cardStatus.description.toString()
+            this.cardstatusUser.text = cardStatusAndUser.user.name
         }
     }
 }

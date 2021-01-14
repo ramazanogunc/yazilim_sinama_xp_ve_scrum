@@ -18,7 +18,10 @@ import com.ramo.xpandscrum.model.Card
 import com.ramo.xpandscrum.model.CardType
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
+/*
+Viewpager içindeki her bir tahtanın sayfası
 
+ */
 class BoardFragment(private val projectId: Int, private val cardType: CardType) :
     Fragment() {
 
@@ -88,10 +91,12 @@ class BoardFragment(private val projectId: Int, private val cardType: CardType) 
         popup.show()
     }
 
+    // bir öğenin silme tıklanma durumu
     private fun onDeleteClick(card: Card) {
         cardViewModel.delete(card.cardId)
     }
 
+    // bir öğenin tıklanma durumu
     private fun onItemClick(card: Card) {
         (parentFragment as BoardMasterFragment).navigateEditFragment(card.cardId)
     }

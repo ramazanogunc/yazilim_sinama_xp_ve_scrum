@@ -15,6 +15,7 @@ import com.ramo.xpandscrum.validateAndDo
 import com.ramo.xpandscrum.viewModel.MainViewModel
 import com.ramo.xpandscrum.viewModel.MainViewModelFactory
 
+// proje ekleme sayfası
 class AddProjectFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by viewModels {
@@ -74,7 +75,7 @@ class AddProjectFragment : Fragment() {
                 block()
         }
     }
-
+    // proje bilgisini ekrandan alır
     private fun getProjectFromUi(): Project {
         return Project(
             addBinding!!.projectName.text.toString()

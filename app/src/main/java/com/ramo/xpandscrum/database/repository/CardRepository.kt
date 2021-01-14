@@ -4,6 +4,9 @@ import com.ramo.xpandscrum.database.dao.CardDao
 import com.ramo.xpandscrum.model.Card
 import com.ramo.xpandscrum.model.CardType
 
+/*
+veritabanı ile viewmodel arasındakı işlemleri yapar.
+ */
 class CardRepository(private val cardDao: CardDao) {
 
     fun getAllCardFromByProjectAndCardType(cardId: Int, cardType: CardType) =

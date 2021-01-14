@@ -7,7 +7,10 @@ import com.ramo.xpandscrum.model.CardType
 import java.lang.reflect.Type
 import java.util.*
 
-
+/*
+veritabanına kaydederken özel modelleri primitif tipe dönüştürme fonksiyonları
+tip dönüşümü yaparak işlerimizi kolaylaştırır
+ */
 object DataTypeConverter {
     @TypeConverter
     @JvmStatic

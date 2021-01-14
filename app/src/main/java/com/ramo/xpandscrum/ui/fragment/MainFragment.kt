@@ -21,6 +21,9 @@ import com.ramo.xpandscrum.viewModel.MainViewModel
 import com.ramo.xpandscrum.viewModel.MainViewModelFactory
 import com.ramo.xpandscrum.viewModel.UserViewModel
 
+/*
+Ana sayfa.
+ */
 class MainFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by viewModels {
@@ -69,6 +72,9 @@ class MainFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            /*
+            sahte kullanıcıları veritabanına kaydeyme durumu
+             */
             R.id.fakeUsers -> {
                 val userViewModel =
                     UserViewModel(UserRepository(AppDatabase.getInstance(requireContext()).userDao))
@@ -84,6 +90,7 @@ class MainFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    // proje ekleme butonu tıklama
     private fun onClickAddProject() {
         findNavController().navigate(R.id.action_mainFragment_to_addProjectFragment)
     }

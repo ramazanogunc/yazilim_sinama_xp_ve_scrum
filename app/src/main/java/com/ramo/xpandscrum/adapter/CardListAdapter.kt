@@ -9,7 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramo.xpandscrum.databinding.ItemBoardBinding
 import com.ramo.xpandscrum.model.Card
 
-
+/*
+bir tane iş kartı için kullnaılan adapter
+öğe tıklaması
+silme tıklaması
+taşıma tıklaması içerir
+ */
 class CardListAdapter(
     private val onItemClick: (card: Card) -> Unit,
     private val onEditClick: (card: Card) -> Unit,
@@ -29,7 +34,11 @@ class CardListAdapter(
     }
 
 }
-
+/*
+view i inflate eder.
+gerekli verileri ekranda gösterir.
+click işlerini yapar
+ */
 class CardViewHolder(
     private val itemBinding: ItemBoardBinding,
     private val onItemClick: (card: Card) -> Unit,
@@ -48,7 +57,9 @@ class CardViewHolder(
     }
 
 }
-
+/*
+karşılaştırma işlemi yapar
+ */
 class CardComparator : DiffUtil.ItemCallback<Card>() {
     override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean {
         return oldItem === newItem

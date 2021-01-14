@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id "org.sonarqube" version "3.0"
 }
 
 android {
@@ -35,6 +36,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.sourceEncoding", "UTF-8"
+        }
     }
 }
 

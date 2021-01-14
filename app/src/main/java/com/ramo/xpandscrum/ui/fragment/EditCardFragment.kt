@@ -17,11 +17,14 @@ import com.ramo.xpandscrum.model.Card
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
 
+// kart düzenleme sayfası
 class EditCardFragment : Fragment() {
 
+    // ilgili kart id si
     private var cardId: Int = 0
     private var binding: FragmentAddEditCardBinding? = null
     private val number by navArgs<EditCardFragmentArgs>()
+    // çekilen kartın bilgileri
     private var card: Card? = null
 
     private val cardViewModel: CardViewModel by lazy {
@@ -54,13 +57,14 @@ class EditCardFragment : Fragment() {
         }
     }
 
+    // iş takibi butonu tıklaması
     private fun onJobTraceClick() {
         val bundle = bundleOf("cardId" to cardId)
         bundle.putSerializable("cardType", card?.cardType)
         findNavController().navigate(R.id.action_editCardFragment_to_cardStatusFragment, bundle)
     }
 
-
+// kaydet butonu tıklaması
     private fun onSaveClick() {
 
         validateAndDo(

@@ -3,6 +3,9 @@ package com.ramo.xpandscrum.database.repository
 import com.ramo.xpandscrum.database.dao.CardStatusDao
 import com.ramo.xpandscrum.model.CardStatus
 
+/*
+veritabanı ile viewmodel arasındakı işlemleri yapar.
+ */
 class CardStatusRepository(private val cardStatusDao: CardStatusDao) {
 
     fun getAllCardStatusCardId(cardId: Int) = cardStatusDao.getAllCardStatusCardId(cardId)

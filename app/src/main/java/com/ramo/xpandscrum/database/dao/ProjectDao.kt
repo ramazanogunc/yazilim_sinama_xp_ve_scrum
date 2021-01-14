@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.ramo.xpandscrum.model.Project
 
+/*
+Proje sql sorgularını içerir.
+ */
 @Dao
 interface ProjectDao {
     @Query("SELECT * FROM project__table")

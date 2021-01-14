@@ -8,7 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramo.xpandscrum.databinding.ItemProjectBinding
 import com.ramo.xpandscrum.model.Project
 
-
+/*
+ projeleri listelemek için kullanılır
+ tıklama
+ silme tıklama
+ düzenleme tıklama
+ işlemlerini içerir
+ */
 class ProjectListAdapter(
     private val onItemClick: (project: Project) -> Unit,
     private val onEditClick: (project: Project) -> Unit,
@@ -29,6 +35,10 @@ class ProjectListAdapter(
 
 }
 
+/*
+Bir tane itemi inflate eder.
+ilgili öğeyi ekrana bind eder
+ */
 class ProjectViewHolder(
     private val itemBinding: ItemProjectBinding,
     private val onItemClick: (project: Project) -> Unit,
@@ -48,6 +58,9 @@ class ProjectViewHolder(
 
 }
 
+/*
+karşılaştırma işlemi yapar
+ */
 class ProjectComparator : DiffUtil.ItemCallback<Project>() {
     override fun areItemsTheSame(oldItem: Project, newItem: Project): Boolean {
         return oldItem === newItem

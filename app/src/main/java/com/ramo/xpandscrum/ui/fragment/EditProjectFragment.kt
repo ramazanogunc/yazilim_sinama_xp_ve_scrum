@@ -15,6 +15,7 @@ import com.ramo.xpandscrum.validateAndDo
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
 import com.ramo.xpandscrum.viewModel.MainViewModel
 
+// proje düzenleme sayfası
 class EditProjectFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by lazy {
@@ -23,7 +24,7 @@ class EditProjectFragment : Fragment() {
             CardViewModelFactory(CardRepository(AppDatabase.getInstance(requireContext()).cardDao))
         ).get(MainViewModel::class.java)
     }
-
+    // ilgili proje id si
     private var projectId: Int = 0
     private var editBinding: FragmentAddEditProjectBinding? = null
 
@@ -81,6 +82,7 @@ class EditProjectFragment : Fragment() {
 
     }
 
+    // ekrandan proje bilgisini alır
     private fun getProjectFromUi(): Project {
         val project = Project(
             editBinding!!.projectName.text.toString()

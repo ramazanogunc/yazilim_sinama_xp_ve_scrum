@@ -10,17 +10,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.ramo.xpandscrum.*
 import com.ramo.xpandscrum.database.AppDatabase
 import com.ramo.xpandscrum.database.repository.CardRepository
-import com.ramo.xpandscrum.database.repository.UserRepository
 import com.ramo.xpandscrum.databinding.FragmentAddEditCardBinding
 import com.ramo.xpandscrum.model.Card
 import com.ramo.xpandscrum.viewModel.CardViewModel
 import com.ramo.xpandscrum.viewModel.CardViewModelFactory
-import com.ramo.xpandscrum.viewModel.UserViewModel
-import com.ramo.xpandscrum.viewModel.UserViewModelFactory
 import java.util.*
 
+// iş takibi ekleme durumu adı yanlış yazılmış
 class AddEditCardFragment : Fragment() {
 
+    // aktif proje id si
     private var projectId: Int = 0
 
     private var binding: FragmentAddEditCardBinding? = null
@@ -32,12 +31,6 @@ class AddEditCardFragment : Fragment() {
         ).get(CardViewModel::class.java)
     }
 
-    private val userViewModel: UserViewModel by lazy {
-        ViewModelProvider(
-            requireActivity(),
-            UserViewModelFactory(UserRepository(AppDatabase.getInstance(requireContext()).userDao))
-        ).get(UserViewModel::class.java)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

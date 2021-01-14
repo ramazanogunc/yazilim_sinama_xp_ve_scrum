@@ -24,6 +24,7 @@ import com.ramo.xpandscrum.viewModel.CardStatusViewModel
 import com.ramo.xpandscrum.viewModel.CardStatusViewModelFactory
 import java.util.*
 
+// İş takibi ekleme güncelleme sayfası
 class AddCardStatusFragment : Fragment() {
 
     private var binding: FragmentAddEditCardStatusBinding? = null
@@ -36,9 +37,16 @@ class AddCardStatusFragment : Fragment() {
             )
         ).get(CardStatusViewModel::class.java)
     }
+    // güncelleme halinde secili iş takibi id si
     private var cardStatusId: Int? = null
+    // ilgili kart id si
     private var cardId = 0
+    // spinnerdan seçilen kullanıcı id si
     private var selectedUserId = 0
+    /*
+    ekleme veya düzenleme durumu
+    0 = Ekleme, 1 = düzenleme
+     */
     private var mode = 0
     private val MODE_ADD = 0
     private val MODE_EDIT = 1
@@ -147,13 +155,14 @@ class AddCardStatusFragment : Fragment() {
         }
     }
 
-
+    // iş takibi ekleme durumu
     private fun insert() {
         val cardStatus = getCardStatusFromUi()
         cardStatusViewModel.insert(cardStatus)
         requireActivity().onBackPressed()
     }
 
+    // iş takibi güncelleme durumu
     private fun update() {
         cardStatusId?.let {
             val cardStatus = getCardStatusFromUi()

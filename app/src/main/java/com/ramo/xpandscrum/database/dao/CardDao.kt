@@ -5,6 +5,9 @@ import androidx.room.*
 import com.ramo.xpandscrum.model.Card
 import com.ramo.xpandscrum.model.CardType
 
+/*
+card sql sorgularını içerir.
+ */
 @Dao
 interface CardDao {
 

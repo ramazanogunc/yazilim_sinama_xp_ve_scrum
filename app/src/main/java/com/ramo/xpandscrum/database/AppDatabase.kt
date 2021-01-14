@@ -13,7 +13,10 @@ import com.ramo.xpandscrum.model.Card
 import com.ramo.xpandscrum.model.CardStatus
 import com.ramo.xpandscrum.model.Project
 import com.ramo.xpandscrum.model.User
-
+/*
+Veritabanı singleton sınıfımız
+Room database
+ */
 @Database(
     entities = [
         Project::class,
@@ -26,14 +29,21 @@ import com.ramo.xpandscrum.model.User
 )
 @TypeConverters(DataTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
+    // proje crud işlemleri için
     abstract val projectDao: ProjectDao
+    // card crud işlemleri için
     abstract val cardDao: CardDao
+    // user crud işlemleri için
     abstract val userDao: UserDao
+    // iş takibi crud işlemleri
     abstract val cardStatusDao: CardStatusDao
 
+    // static fonksiyon ve propertyler
     companion object {
+        // veritabanı adı
         private const val DATABASE_NAME = "xp_and_scrum_db"
 
+        // singleton property
         @Volatile
         private var instance: AppDatabase? = null
 

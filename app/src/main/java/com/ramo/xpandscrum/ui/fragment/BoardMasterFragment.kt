@@ -11,6 +11,10 @@ import com.ramo.xpandscrum.R
 import com.ramo.xpandscrum.adapter.BoardMasterFragmentAdapter
 import com.ramo.xpandscrum.databinding.FragmentMasterBoardBinding
 
+/*
+tüm tahtaların ana sayfası.
+görevi: viewpageri hazırlar.
+ */
 class BoardMasterFragment : Fragment() {
 
     private var projectId: Int = 0
@@ -41,6 +45,7 @@ class BoardMasterFragment : Fragment() {
         masterBoardBinding = null
     }
 
+    // kart tıklandığında edit sayfasına yönlendirir
     fun navigateEditFragment(cardId: Int) {
         findNavController().navigate(
             BoardMasterFragmentDirections.actionBoardMasterFragmentToEditCardFragment2(
@@ -49,7 +54,7 @@ class BoardMasterFragment : Fragment() {
         )
     }
 
-
+    // on click ve title durumlarını hazırlar
     private fun initUi() {
         with(masterBoardBinding) {
             this!!.toolbar.title = projectName

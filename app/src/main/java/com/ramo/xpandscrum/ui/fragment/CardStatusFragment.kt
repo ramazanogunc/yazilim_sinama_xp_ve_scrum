@@ -64,7 +64,7 @@ class CardStatusFragment : Fragment() {
         val bundle = bundleOf("cardId" to cardId)
         bundle.putInt("mode", 1)
         bundle.putSerializable("cardType", arguments?.get("cardType") as CardType)
-        bundle.putInt("cardStatusId", cardStatus.cardStatus!!.cardStatusId)
+        bundle.putInt("cardStatusId", cardStatus.cardStatus.cardStatusId)
         findNavController().navigate(
             R.id.action_cardStatusFragment_to_addEditCardStatusFragment,
             bundle
@@ -72,7 +72,7 @@ class CardStatusFragment : Fragment() {
     }
 
     private fun onDeleteClick(cardStatus: CardStatusAndUser) {
-        cardStatusViewModel.delete(cardStatus.cardStatus!!.cardStatusId)
+        cardStatusViewModel.delete(cardStatus.cardStatus.cardStatusId)
 
     }
 

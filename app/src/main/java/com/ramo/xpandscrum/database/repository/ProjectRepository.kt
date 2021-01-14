@@ -3,6 +3,9 @@ package com.ramo.xpandscrum.database.repository
 import com.ramo.xpandscrum.database.dao.ProjectDao
 import com.ramo.xpandscrum.model.Project
 
+/*
+veritabanı ile viewmodel arasındakı işlemleri yapar.
+ */
 class ProjectRepository(private val projectDao: ProjectDao) {
 
     val allProjects = projectDao.getAllProjects()

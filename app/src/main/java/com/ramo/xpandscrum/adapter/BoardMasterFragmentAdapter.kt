@@ -6,6 +6,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.ramo.xpandscrum.model.CardType
 import com.ramo.xpandscrum.ui.fragment.BoardFragment
 
+/*
+Tahtalarda kullanılan tablayout için hazırlandır.
+görevi tabları oluşturmak ve yönetmek
+
+ */
 class BoardMasterFragmentAdapter(fm: FragmentManager, private val projectId: Int) :
     FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
@@ -22,6 +27,7 @@ class BoardMasterFragmentAdapter(fm: FragmentManager, private val projectId: Int
         prepareTabs()
     }
 
+    // tabları hazırlar
     private fun prepareTabs() {
         setFragment("TO DO", BoardFragment(projectId, CardType.TODO))
         setFragment("IN PROGRESS", BoardFragment(projectId, CardType.IN_PROGRESS))
@@ -30,6 +36,7 @@ class BoardMasterFragmentAdapter(fm: FragmentManager, private val projectId: Int
         setFragment("DONE", BoardFragment(projectId, CardType.DONE))
     }
 
+    // bir tane tabı set eder
     private fun setFragment(string: String, boardFragment: BoardFragment) {
         titleList.add(string)
         fragmentList.add(boardFragment)

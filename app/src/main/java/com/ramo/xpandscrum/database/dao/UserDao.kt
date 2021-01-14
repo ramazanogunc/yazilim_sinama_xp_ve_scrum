@@ -7,6 +7,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.ramo.xpandscrum.model.User
 
+/*
+user sql sorgularını içerir.
+ */
 @Dao
 interface UserDao {
 

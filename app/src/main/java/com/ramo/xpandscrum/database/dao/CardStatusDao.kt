@@ -5,6 +5,9 @@ import androidx.room.*
 import com.ramo.xpandscrum.model.CardStatus
 import com.ramo.xpandscrum.model.CardStatusAndUser
 
+/*
+iş takibi sql sorgularını içerir.
+ */
 @Dao
 interface CardStatusDao {
     @Transaction
