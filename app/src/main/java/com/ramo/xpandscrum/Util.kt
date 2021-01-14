@@ -47,7 +47,7 @@ fun View.hide() {
     this.visibility = View.GONE
 }
 
-// return Show real time
+// Show real time
 fun calculateRealMinute(date: Date): Int {
     val today = Date()
     val diff = today.time - date.time
