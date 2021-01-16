@@ -12,8 +12,11 @@ interface ProjectDao {
     @Query("SELECT * FROM project__table")
     fun getAllProjects(): LiveData<List<Project>>
 
+    @Query("SELECT * FROM project__table")
+    fun getAllTestProjects(): List<Project>
+
     @Query("SELECT * FROM project__table WHERE _id=:id")
-    suspend fun getProject(id:Int): Project?
+    suspend fun getProject(id: Int): Project?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertProject(project: Project)
